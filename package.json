@@ -1,0 +1,26 @@
+{
+  "name": "speculation-pilot",
+  "version": "0.3.0",
+  "description": "Safely configure, diagnose, and measure WordPress speculative loading.",
+  "private": true,
+  "scripts": {
+    "build": "node tools/build-assets.js",
+    "start": "node tools/build-assets.js --watch",
+    "test": "node tools/smoke-test.js",
+    "qa:up": "docker compose up -d",
+    "qa:setup": "bash tools/local-wp-setup.sh",
+    "qa": "npm run qa:up && npm run qa:setup",
+    "test:e2e": "playwright test",
+    "lint:js": "wp-scripts lint-js src build",
+    "lint:css": "wp-scripts lint-style src build",
+    "format": "wp-scripts format-js src build",
+    "plugin-zip": "node tools/package-plugin.js"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.56.0",
+    "@wordpress/scripts": "^30.16.0"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

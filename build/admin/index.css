@@ -1,0 +1,328 @@
+.speculation-pilot-wrap {
+	max-width: 1180px;
+}
+
+.speculation-pilot {
+	color: #1d2327;
+	margin-top: 20px;
+}
+
+.speculation-pilot__header {
+	align-items: flex-start;
+	display: flex;
+	gap: 24px;
+	justify-content: space-between;
+	margin-bottom: 18px;
+}
+
+.speculation-pilot__eyebrow {
+	color: #646970;
+	font-size: 12px;
+	font-weight: 600;
+	letter-spacing: 0;
+	margin: 0 0 4px;
+	text-transform: uppercase;
+}
+
+.speculation-pilot h1 {
+	font-size: 26px;
+	line-height: 1.2;
+	margin: 0 0 6px;
+}
+
+.speculation-pilot__subtitle {
+	color: #50575e;
+	font-size: 14px;
+	margin: 0;
+	max-width: 680px;
+}
+
+.speculation-pilot__header-actions {
+	align-items: center;
+	display: flex;
+	gap: 8px;
+}
+
+.speculation-pilot__grid {
+	display: grid;
+	gap: 16px;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	margin-bottom: 16px;
+}
+
+.speculation-pilot__panel-grid {
+	display: grid;
+	gap: 16px;
+	grid-template-columns: minmax(0, 2fr) minmax(280px, 1fr);
+}
+
+.speculation-pilot__metric {
+	background: #fff;
+	border: 1px solid #dcdcde;
+	border-radius: 6px;
+	padding: 16px;
+}
+
+.speculation-pilot__metric-label {
+	color: #646970;
+	font-size: 12px;
+	font-weight: 600;
+	margin: 0 0 8px;
+	text-transform: uppercase;
+}
+
+.speculation-pilot__metric-value {
+	font-size: 24px;
+	font-weight: 700;
+	line-height: 1.2;
+	margin: 0;
+}
+
+.speculation-pilot__metric-note {
+	color: #646970;
+	margin: 6px 0 0;
+}
+
+.speculation-pilot__section {
+	background: #fff;
+	border: 1px solid #dcdcde;
+	border-radius: 6px;
+	margin-bottom: 16px;
+	padding: 18px;
+}
+
+.speculation-pilot__section h2 {
+	font-size: 18px;
+	margin: 0 0 12px;
+}
+
+.speculation-pilot__section h3 {
+	font-size: 15px;
+	margin: 18px 0 8px;
+}
+
+.speculation-pilot__section p {
+	color: #50575e;
+	margin-top: 0;
+}
+
+.speculation-pilot__toolbar {
+	align-items: center;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 12px;
+	margin-bottom: 14px;
+}
+
+.speculation-pilot__tabs {
+	border-bottom: 1px solid #dcdcde;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 4px;
+	margin-bottom: 16px;
+}
+
+.speculation-pilot__tab {
+	background: transparent;
+	border: 0;
+	border-bottom: 3px solid transparent;
+	color: #2c3338;
+	cursor: pointer;
+	font-weight: 600;
+	padding: 10px 12px;
+}
+
+.speculation-pilot__tab.is-active {
+	border-bottom-color: #2271b1;
+	color: #0a4b78;
+}
+
+.speculation-pilot__form-grid {
+	display: grid;
+	gap: 16px;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.speculation-pilot__preset-grid {
+	display: grid;
+	gap: 12px;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.speculation-pilot__preset {
+	background: #f6f7f7;
+	border: 1px solid #dcdcde;
+	border-radius: 6px;
+	cursor: pointer;
+	min-height: 130px;
+	padding: 14px;
+	text-align: left;
+}
+
+.speculation-pilot__preset.is-active {
+	background: #f0f6fc;
+	border-color: #2271b1;
+	box-shadow: inset 0 0 0 1px #2271b1;
+}
+
+.speculation-pilot__preset strong {
+	display: block;
+	font-size: 14px;
+	margin-bottom: 6px;
+}
+
+.speculation-pilot__preset span {
+	color: #50575e;
+	display: block;
+	line-height: 1.45;
+}
+
+.speculation-pilot__list {
+	border: 1px solid #dcdcde;
+	border-radius: 6px;
+	margin: 0;
+	max-height: 320px;
+	overflow: auto;
+	padding: 0;
+}
+
+.speculation-pilot__list li {
+	align-items: center;
+	border-bottom: 1px solid #f0f0f1;
+	display: flex;
+	gap: 10px;
+	justify-content: space-between;
+	margin: 0;
+	padding: 10px 12px;
+}
+
+.speculation-pilot__list li:last-child {
+	border-bottom: 0;
+}
+
+.speculation-pilot__code {
+	background: #f6f7f7;
+	border-radius: 4px;
+	font-family: Consolas, Monaco, monospace;
+	font-size: 12px;
+	padding: 3px 6px;
+}
+
+.speculation-pilot__status {
+	border-radius: 999px;
+	display: inline-flex;
+	font-size: 12px;
+	font-weight: 700;
+	line-height: 1;
+	padding: 5px 8px;
+	text-transform: uppercase;
+}
+
+.speculation-pilot__status--ok {
+	background: #edfaef;
+	color: #008a20;
+}
+
+.speculation-pilot__status--warning {
+	background: #fcf9e8;
+	color: #996800;
+}
+
+.speculation-pilot__status--error {
+	background: #fcf0f1;
+	color: #b32d2e;
+}
+
+.speculation-pilot__status--info {
+	background: #f0f6fc;
+	color: #0a4b78;
+}
+
+.speculation-pilot__empty {
+	background: #f6f7f7;
+	border: 1px dashed #c3c4c7;
+	border-radius: 6px;
+	color: #646970;
+	padding: 24px;
+	text-align: center;
+}
+
+.speculation-pilot__table {
+	border-collapse: collapse;
+	width: 100%;
+}
+
+.speculation-pilot__table th,
+.speculation-pilot__table td {
+	border-bottom: 1px solid #f0f0f1;
+	padding: 10px;
+	text-align: left;
+}
+
+.speculation-pilot__table th {
+	color: #646970;
+	font-size: 12px;
+	text-transform: uppercase;
+}
+
+.speculation-pilot__bars {
+	display: grid;
+	gap: 12px;
+}
+
+.speculation-pilot__bar-row {
+	align-items: center;
+	display: grid;
+	gap: 10px;
+	grid-template-columns: minmax(90px, 0.9fr) minmax(120px, 2fr) minmax(80px, auto) minmax(70px, auto);
+}
+
+.speculation-pilot__bar-label,
+.speculation-pilot__bar-value,
+.speculation-pilot__bar-secondary {
+	color: #50575e;
+	font-size: 12px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.speculation-pilot__bar-value {
+	color: #1d2327;
+	font-weight: 700;
+}
+
+.speculation-pilot__bar-track {
+	background: #f0f0f1;
+	border-radius: 999px;
+	height: 10px;
+	overflow: hidden;
+}
+
+.speculation-pilot__bar-fill {
+	background: #2271b1;
+	border-radius: 999px;
+	height: 100%;
+	min-width: 4px;
+}
+
+@media (max-width: 960px) {
+	.speculation-pilot__grid,
+	.speculation-pilot__panel-grid,
+	.speculation-pilot__form-grid,
+	.speculation-pilot__preset-grid {
+		grid-template-columns: 1fr;
+	}
+
+	.speculation-pilot__header {
+		display: block;
+	}
+
+	.speculation-pilot__header-actions {
+		margin-top: 12px;
+	}
+
+	.speculation-pilot__bar-row {
+		grid-template-columns: 1fr;
+	}
+}
