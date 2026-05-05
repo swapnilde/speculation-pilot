@@ -160,10 +160,13 @@ final class Measurements {
 	public function get_report(): array {
 		global $wpdb;
 
-		$settings = $this->settings->get();
-		$days     = max( 1, (int) $settings['retention_days'] );
-		$table    = self::table_name();
-		$since    = gmdate( 'Y-m-d H:i:s', time() - ( DAY_IN_SECONDS * $days ) );
+		$settings       = $this->settings->get();
+		$requested_days = max( 1, (int) $settings['retention_days'] );
+		$days           = Settings::get_effective_retention_days( $requested_days );
+		$table          = self::table_name();
+		$since          = gmdate( 'Y-m-d H:i:s', time() - ( DAY_IN_SECONDS * $days ) );
+		$is_pro         = (bool) apply_filters( 'speculation_pilot_is_pro', false );
+		$max_top_paths  = (int) apply_filters( 'speculation_pilot_max_top_paths', SPECULATION_PILOT_FREE_MAX_TOP_PATHS );
 
 		if ( ! self::table_exists() ) {
 			return $this->empty_report( $settings );
@@ -366,10 +369,17 @@ final class Measurements {
 			'p75Duration'    => self::percentile( $durations, 75 ),
 			'p50Ttfb'        => self::percentile( $ttfbs, 50 ),
 			'p75Ttfb'        => self::percentile( $ttfbs, 75 ),
-			'topPaths'       => array_slice( $top_paths, 0, 10 ),
-			'pathGroups'     => array_slice( $path_groups, 0, 8 ),
-			'dailySeries'    => $daily_series,
-			'modeBreakdown'  => $mode_breakdown,
+			'topPaths'       => array_slice( $top_paths, 0, $max_top_paths ),
+			'pathGroups'     => $is_pro ? array_slice( $path_groups, 0, 8 ) : array(),
+			'dailySeries'    => $is_pro ? $daily_series : array(),
+			'modeBreakdown'  => $is_pro ? $mode_breakdown : array(),
+			'csvEnabled'     => $is_pro,
+			'proRequired'    => array(
+				'dailySeries'   => ! $is_pro,
+				'pathGroups'    => ! $is_pro,
+				'modeBreakdown' => ! $is_pro,
+				'csvExport'     => ! $is_pro,
+			),
 			'privacySummary' => __( 'Speculation Pilot stores local paths and timing numbers only. It does not store IP addresses, cookies, user IDs, query strings, form values, emails, full URLs, or user agents.', 'speculation-pilot' ),
 		);
 	}

@@ -160,6 +160,10 @@ final class Cli {
 	 * @param array<string, mixed> $assoc_args Associative args.
 	 */
 	public function exclusions( array $args, array $assoc_args ): void {
+		if ( ! apply_filters( 'speculation_pilot_is_pro', false ) ) {
+			\WP_CLI::error( 'The exclusions command requires Speculation Pilot Pro. Visit https://speculationpilot.com/pricing/ to upgrade.' );
+		}
+
 		$paths  = array_map(
 			static function ( string $path ): array {
 				return array( 'path' => $path );
@@ -188,6 +192,10 @@ final class Cli {
 	 * @param array<string, mixed> $assoc_args Associative args.
 	 */
 	public function report( array $args, array $assoc_args ): void {
+		if ( ! apply_filters( 'speculation_pilot_is_pro', false ) ) {
+			\WP_CLI::error( 'The report command requires Speculation Pilot Pro. Visit https://speculationpilot.com/pricing/ to upgrade.' );
+		}
+
 		$report = $this->measurements->get_report();
 		$format = isset( $assoc_args['format'] ) ? (string) $assoc_args['format'] : 'table';
 

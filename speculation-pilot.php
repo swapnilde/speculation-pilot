@@ -28,6 +28,9 @@ define( 'SPECULATION_PILOT_PATH', plugin_dir_path( __FILE__ ) );
 define( 'SPECULATION_PILOT_URL', plugin_dir_url( __FILE__ ) );
 define( 'SPECULATION_PILOT_OPTION', 'speculation_pilot_settings' );
 define( 'SPECULATION_PILOT_CRON_CLEANUP', 'speculation_pilot_cleanup_measurements' );
+define( 'SPECULATION_PILOT_FREE_RETENTION_DAYS', 7 );
+define( 'SPECULATION_PILOT_FREE_MAX_EXCLUSIONS', 5 );
+define( 'SPECULATION_PILOT_FREE_MAX_TOP_PATHS', 3 );
 
 spl_autoload_register(
 	static function ( string $class ): void {

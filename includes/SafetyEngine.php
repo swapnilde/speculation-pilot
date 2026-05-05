@@ -71,12 +71,14 @@ final class SafetyEngine {
 		$settings     = $this->settings->get();
 		$integrations = (array) $settings['integrations'];
 		$preset       = (string) $settings['preset'];
+		$is_pro       = (bool) apply_filters( 'speculation_pilot_is_pro', false );
 
 		$groups = array(
 			'core_like'       => array(
-				'label'  => __( 'WordPress safety paths', 'speculation-pilot' ),
-				'active' => true,
-				'paths'  => array(
+				'label'        => __( 'WordPress safety paths', 'speculation-pilot' ),
+				'active'       => true,
+				'pro_required' => false,
+				'paths'        => array(
 					'/wp-login.php',
 					'/wp-admin/*',
 					'/wp-json/*',
@@ -84,9 +86,10 @@ final class SafetyEngine {
 				),
 			),
 			'generic_account' => array(
-				'label'  => __( 'Account and state-changing paths', 'speculation-pilot' ),
-				'active' => true,
-				'paths'  => array(
+				'label'        => __( 'Account and state-changing paths', 'speculation-pilot' ),
+				'active'       => true,
+				'pro_required' => false,
+				'paths'        => array(
 					'/login/*',
 					'/logout/*',
 					'/account/*',
@@ -99,9 +102,10 @@ final class SafetyEngine {
 				),
 			),
 			'commerce'        => array(
-				'label'  => __( 'Cart, checkout, and payment paths', 'speculation-pilot' ),
-				'active' => true,
-				'paths'  => array(
+				'label'        => __( 'Cart, checkout, and payment paths', 'speculation-pilot' ),
+				'active'       => true,
+				'pro_required' => false,
+				'paths'        => array(
 					'/cart/',
 					'/cart/*',
 					'/basket/',
@@ -119,24 +123,27 @@ final class SafetyEngine {
 				),
 			),
 			'query_strings'   => array(
-				'label'  => __( 'Query-string actions', 'speculation-pilot' ),
-				'active' => true,
-				'paths'  => array(
+				'label'        => __( 'Query-string actions', 'speculation-pilot' ),
+				'active'       => true,
+				'pro_required' => false,
+				'paths'        => array(
 					'/*\\?(.+)',
 				),
 			),
 			'search'          => array(
-				'label'  => __( 'Search pages', 'speculation-pilot' ),
-				'active' => true,
-				'paths'  => array(
+				'label'        => __( 'Search pages', 'speculation-pilot' ),
+				'active'       => true,
+				'pro_required' => false,
+				'paths'        => array(
 					'/search/*',
 					'/*\\?*s=*',
 				),
 			),
 			'woocommerce'     => array(
-				'label'  => 'WooCommerce',
-				'active' => ! empty( $integrations['woocommerce'] ) || class_exists( 'WooCommerce' ),
-				'paths'  => array(
+				'label'        => 'WooCommerce',
+				'active'       => $is_pro && ( ! empty( $integrations['woocommerce'] ) || class_exists( 'WooCommerce' ) ),
+				'pro_required' => true,
+				'paths'        => array(
 					'/cart/',
 					'/cart/*',
 					'/checkout/',
@@ -151,9 +158,10 @@ final class SafetyEngine {
 				),
 			),
 			'edd'             => array(
-				'label'  => 'Easy Digital Downloads',
-				'active' => ! empty( $integrations['edd'] ) || class_exists( 'Easy_Digital_Downloads' ),
-				'paths'  => array(
+				'label'        => 'Easy Digital Downloads',
+				'active'       => $is_pro && ( ! empty( $integrations['edd'] ) || class_exists( 'Easy_Digital_Downloads' ) ),
+				'pro_required' => true,
+				'paths'        => array(
 					'/checkout/',
 					'/checkout/*',
 					'/purchase-confirmation/*',
@@ -162,9 +170,10 @@ final class SafetyEngine {
 				),
 			),
 			'membership'      => array(
-				'label'  => __( 'Membership and LMS paths', 'speculation-pilot' ),
-				'active' => ! empty( $integrations['membership'] ) || ! empty( $integrations['lms'] ),
-				'paths'  => array(
+				'label'        => __( 'Membership and LMS paths', 'speculation-pilot' ),
+				'active'       => $is_pro && ( ! empty( $integrations['membership'] ) || ! empty( $integrations['lms'] ) ),
+				'pro_required' => true,
+				'paths'        => array(
 					'/account/*',
 					'/dashboard/*',
 					'/members/*',
@@ -186,18 +195,20 @@ final class SafetyEngine {
 				),
 			),
 			'multilingual'    => array(
-				'label'  => __( 'Multilingual query actions', 'speculation-pilot' ),
-				'active' => ! empty( $integrations['multilingual'] ) || defined( 'ICL_SITEPRESS_VERSION' ) || defined( 'POLYLANG_VERSION' ) || defined( 'TRP_PLUGIN_VERSION' ),
-				'paths'  => array(
+				'label'        => __( 'Multilingual query actions', 'speculation-pilot' ),
+				'active'       => $is_pro && ( ! empty( $integrations['multilingual'] ) || defined( 'ICL_SITEPRESS_VERSION' ) || defined( 'POLYLANG_VERSION' ) || defined( 'TRP_PLUGIN_VERSION' ) ),
+				'pro_required' => true,
+				'paths'        => array(
 					'/*\\?*lang=*',
 					'/*\\?*wpml_lang=*',
 					'/*\\?*trp-edit-translation=*',
 				),
 			),
 			'funnel_checkout' => array(
-				'label'  => __( 'Funnel and checkout builders', 'speculation-pilot' ),
-				'active' => class_exists( 'WooFunnel_Loader' ) || defined( 'CARTFLOWS_FILE' ) || defined( 'FLUENT_CHECKOUT_VERSION' ),
-				'paths'  => array(
+				'label'        => __( 'Funnel and checkout builders', 'speculation-pilot' ),
+				'active'       => $is_pro && ( class_exists( 'WooFunnel_Loader' ) || defined( 'CARTFLOWS_FILE' ) || defined( 'FLUENT_CHECKOUT_VERSION' ) ),
+				'pro_required' => true,
+				'paths'        => array(
 					'/step/*',
 					'/checkout-step/*',
 					'/order-bump/*',
@@ -208,9 +219,10 @@ final class SafetyEngine {
 				),
 			),
 			'cache_bypass'    => array(
-				'label'  => __( 'Cache and optimization bypass URLs', 'speculation-pilot' ),
-				'active' => ! empty( $integrations['cache'] ) || defined( 'WP_ROCKET_VERSION' ) || defined( 'LSCWP_V' ) || defined( 'AUTOPTIMIZE_PLUGIN_VERSION' ),
-				'paths'  => array(
+				'label'        => __( 'Cache and optimization bypass URLs', 'speculation-pilot' ),
+				'active'       => $is_pro && ( ! empty( $integrations['cache'] ) || defined( 'WP_ROCKET_VERSION' ) || defined( 'LSCWP_V' ) || defined( 'AUTOPTIMIZE_PLUGIN_VERSION' ) ),
+				'pro_required' => true,
+				'paths'        => array(
 					'/*\\?*nowprocket*',
 					'/*\\?*ao_noptimize=*',
 					'/*\\?*nocache=*',

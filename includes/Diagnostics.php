@@ -77,6 +77,16 @@ final class Diagnostics {
 				: sprintf( __( 'PHP %1$s or newer is required. Current version: %2$s.', 'speculation-pilot' ), SPECULATION_PILOT_MIN_PHP, PHP_VERSION ),
 		);
 
+		$is_pro  = (bool) apply_filters( 'speculation_pilot_is_pro', false );
+		$items[] = array(
+			'key'     => 'plan',
+			'status'  => $is_pro ? 'ok' : 'info',
+			'label'   => __( 'Plan', 'speculation-pilot' ),
+			'message' => $is_pro
+				? (string) apply_filters( 'speculation_pilot_license_message', __( 'Pro license is active.', 'speculation-pilot' ) )
+				: __( 'You are using the free version. Upgrade to Pro for advanced reports and integrations.', 'speculation-pilot' ),
+		);
+
 		$items[] = array(
 			'key'     => 'core_hooks',
 			'status'  => $has_core_filter ? 'ok' : 'error',

@@ -38,7 +38,7 @@ final class Settings {
 				'cache'        => false,
 			),
 			'measurement_enabled'    => false,
-			'retention_days'         => 14,
+			'retention_days'         => SPECULATION_PILOT_FREE_RETENTION_DAYS,
 			'cleanup_on_uninstall'   => false,
 			'prerender_warning_seen' => false,
 		);
@@ -129,6 +129,53 @@ final class Settings {
 			'cleanup_on_uninstall'   => rest_sanitize_boolean( $settings['cleanup_on_uninstall'] ),
 			'prerender_warning_seen' => rest_sanitize_boolean( $settings['prerender_warning_seen'] ),
 		);
+	}
+
+	/**
+	 * Returns the effective maximum retention days.
+	 *
+	 * Free tier returns SPECULATION_PILOT_FREE_RETENTION_DAYS.
+	 * Pro hooks into the filter to raise the cap.
+	 *
+	 * @return int
+	 */
+	public static function get_effective_retention_days_cap(): int {
+		return (int) apply_filters( 'speculation_pilot_max_retention_days', SPECULATION_PILOT_FREE_RETENTION_DAYS );
+	}
+
+	/**
+	 * Returns the effective retention days for queries, clamped to the plan cap.
+	 *
+	 * @param int $requested User-configured retention days.
+	 * @return int
+	 */
+	public static function get_effective_retention_days( int $requested ): int {
+		return min( $requested, self::get_effective_retention_days_cap() );
+	}
+
+	/**
+	 * Returns the effective maximum number of manual exclusions.
+	 *
+	 * @return int
+	 */
+	public static function get_effective_max_exclusions(): int {
+		return (int) apply_filters( 'speculation_pilot_max_exclusions', SPECULATION_PILOT_FREE_MAX_EXCLUSIONS );
+	}
+
+	/**
+	 * Returns the exclusions array clamped to the effective limit.
+	 *
+	 * @param array<string> $exclusions Full exclusion list.
+	 * @return array<string>
+	 */
+	public static function get_effective_exclusions( array $exclusions ): array {
+		$max = self::get_effective_max_exclusions();
+
+		if ( count( $exclusions ) > $max ) {
+			return array_slice( $exclusions, 0, $max );
+		}
+
+		return $exclusions;
 	}
 
 	/**

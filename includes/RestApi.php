@@ -155,11 +155,20 @@ final class RestApi {
 	 * Returns settings payload.
 	 */
 	public function get_settings(): WP_REST_Response {
+		$is_pro = (bool) apply_filters( 'speculation_pilot_is_pro', false );
+
 		return rest_ensure_response(
 			array(
 				'settings'       => $this->settings->get(),
 				'exclusions'     => $this->safety->get_exclusion_paths(),
 				'exclusionNotes' => $this->safety->get_exclusion_groups(),
+				'isPro'          => $is_pro,
+				'limits'         => array(
+					'maxRetentionDays' => Settings::get_effective_retention_days_cap(),
+					'maxExclusions'    => Settings::get_effective_max_exclusions(),
+					'maxTopPaths'      => (int) apply_filters( 'speculation_pilot_max_top_paths', SPECULATION_PILOT_FREE_MAX_TOP_PATHS ),
+					'csvEnabled'       => $is_pro,
+				),
 			)
 		);
 	}
