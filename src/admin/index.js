@@ -83,6 +83,86 @@
 		);
 	}
 
+	function ProBadge() {
+		return el(
+			'a',
+			{
+				className: 'speculation-pilot__pro-badge',
+				href: config.upgradeUrl || 'https://speculationpilot.com/pricing/',
+				target: '_blank',
+				rel: 'noopener noreferrer',
+				title: __( 'Requires Speculation Pilot Pro', 'speculation-pilot' ),
+			},
+			'PRO'
+		);
+	}
+
+	function ProGate( props ) {
+		var isPro = config.isPro;
+		if ( isPro ) {
+			return el( Fragment, null, props.children );
+		}
+
+		return el(
+			'div',
+			{ className: 'speculation-pilot__pro-gate' },
+			el( 'div', { className: 'speculation-pilot__pro-gate-content is-locked' }, props.children ),
+			el(
+				'div',
+				{ className: 'speculation-pilot__pro-gate-overlay' },
+				el( 'p', null, '🔒 ', __( 'Unlock with Speculation Pilot Pro', 'speculation-pilot' ) ),
+				el(
+					Button,
+					{
+						variant: 'primary',
+						href: config.upgradeUrl || 'https://speculationpilot.com/pricing/',
+						target: '_blank',
+					},
+					__( 'Upgrade →', 'speculation-pilot' )
+				)
+			)
+		);
+	}
+
+	function UpgradeBanner() {
+		var dismissed = useState( false );
+		var isDismissed = dismissed[ 0 ];
+		var setDismissed = dismissed[ 1 ];
+
+		if ( config.isPro || isDismissed ) {
+			return null;
+		}
+
+		return el(
+			'div',
+			{ className: 'speculation-pilot__upgrade-banner' },
+			el( 'p', null, '🚀 ', __( 'Unlock WooCommerce presets, 365-day history, advanced reports, and more with Pro.', 'speculation-pilot' ) ),
+			el(
+				'div',
+				{ className: 'speculation-pilot__upgrade-banner-actions' },
+				el(
+					Button,
+					{
+						variant: 'secondary',
+						href: config.upgradeUrl || 'https://speculationpilot.com/pricing/',
+						target: '_blank',
+					},
+					__( 'See Pro →', 'speculation-pilot' )
+				),
+				el(
+					Button,
+					{
+						variant: 'tertiary',
+						onClick: function () {
+							setDismissed( true );
+						},
+					},
+					'✕'
+				)
+			)
+		);
+	}
+
 	function App() {
 		var initial = {
 			enabled: true,
@@ -333,6 +413,7 @@
 				: el(
 						Fragment,
 						null,
+						el( UpgradeBanner ),
 						el(
 							'div',
 							{ className: 'speculation-pilot__tabs' },
@@ -424,6 +505,11 @@
 					label: __( 'Measurements', 'speculation-pilot' ),
 					value: report.sampleCount || 0,
 					note: report.enabled ? __( 'Local samples retained on this site.', 'speculation-pilot' ) : __( 'Measurement is currently off.', 'speculation-pilot' ),
+				} ),
+				el( Metric, {
+					label: __( 'Plan', 'speculation-pilot' ),
+					value: config.isPro ? __( 'Pro ✓', 'speculation-pilot' ) : __( 'Free', 'speculation-pilot' ),
+					note: config.isPro ? __( 'All features unlocked.', 'speculation-pilot' ) : __( 'Upgrade for advanced reports.', 'speculation-pilot' ),
 				} )
 			),
 			el(
@@ -541,10 +627,13 @@
 		var newPathState = useState( '' );
 		var newPath = newPathState[ 0 ];
 		var setNewPath = newPathState[ 1 ];
+		var isPro = config.isPro;
+		var maxExclusions = config.limits ? config.limits.freeMaxExclusions : 5;
+		var atLimit = ! isPro && settings.exclusions.length >= maxExclusions;
 
 		function addPath() {
 			var path = newPath.trim();
-			if ( ! path ) {
+			if ( ! path || atLimit ) {
 				return;
 			}
 			if ( path.charAt( 0 ) !== '/' ) {
@@ -576,52 +665,59 @@
 			el(
 				'div',
 				{ className: 'speculation-pilot__section' },
-				el( 'h2', null, __( 'Integration presets', 'speculation-pilot' ) ),
+				el( 'h2', null, __( 'Integration presets', 'speculation-pilot' ), ! isPro ? el( ProBadge ) : null ),
+				! isPro ? el( 'p', null, __( 'Integration presets require Speculation Pilot Pro.', 'speculation-pilot' ) ) : null,
 				el(
 					'div',
 					{ className: 'speculation-pilot__form-grid' },
-					el( CheckboxControl, {
+					el( 'div', { className: isPro ? '' : 'speculation-pilot__integration-locked' }, el( CheckboxControl, {
 						label: 'WooCommerce',
 						checked: !! settings.integrations.woocommerce,
 						onChange: function ( value ) {
 							props.updateIntegration( 'woocommerce', value );
 						},
-					} ),
-					el( CheckboxControl, {
+						disabled: ! isPro,
+					} ) ),
+					el( 'div', { className: isPro ? '' : 'speculation-pilot__integration-locked' }, el( CheckboxControl, {
 						label: 'Easy Digital Downloads',
 						checked: !! settings.integrations.edd,
 						onChange: function ( value ) {
 							props.updateIntegration( 'edd', value );
 						},
-					} ),
-					el( CheckboxControl, {
+						disabled: ! isPro,
+					} ) ),
+					el( 'div', { className: isPro ? '' : 'speculation-pilot__integration-locked' }, el( CheckboxControl, {
 						label: __( 'Membership plugins', 'speculation-pilot' ),
 						checked: !! settings.integrations.membership,
 						onChange: function ( value ) {
 							props.updateIntegration( 'membership', value );
 						},
-					} ),
-					el( CheckboxControl, {
+						disabled: ! isPro,
+					} ) ),
+					el( 'div', { className: isPro ? '' : 'speculation-pilot__integration-locked' }, el( CheckboxControl, {
 						label: __( 'LMS plugins', 'speculation-pilot' ),
 						checked: !! settings.integrations.lms,
 						onChange: function ( value ) {
 							props.updateIntegration( 'lms', value );
 						},
-					} ),
-					el( CheckboxControl, {
+						disabled: ! isPro,
+					} ) ),
+					el( 'div', { className: isPro ? '' : 'speculation-pilot__integration-locked' }, el( CheckboxControl, {
 						label: __( 'Multilingual plugins', 'speculation-pilot' ),
 						checked: !! settings.integrations.multilingual,
 						onChange: function ( value ) {
 							props.updateIntegration( 'multilingual', value );
 						},
-					} ),
-					el( CheckboxControl, {
+						disabled: ! isPro,
+					} ) ),
+					el( 'div', { className: isPro ? '' : 'speculation-pilot__integration-locked' }, el( CheckboxControl, {
 						label: __( 'Cache and optimization plugins', 'speculation-pilot' ),
 						checked: !! settings.integrations.cache,
 						onChange: function ( value ) {
 							props.updateIntegration( 'cache', value );
 						},
-					} )
+						disabled: ! isPro,
+					} ) )
 				)
 			),
 			el(
@@ -637,16 +733,28 @@
 						placeholder: '/checkout/*',
 						value: newPath,
 						onChange: setNewPath,
+						disabled: atLimit,
 					} ),
 					el(
 						Button,
 						{
 							variant: 'secondary',
 							onClick: addPath,
+							disabled: atLimit,
 						},
 						__( 'Add path', 'speculation-pilot' )
 					)
 				),
+				! isPro
+					? el(
+							'div',
+							{ className: 'speculation-pilot__exclusion-counter' },
+							el( 'strong', null, settings.exclusions.length + ' / ' + maxExclusions ),
+							' ',
+							__( 'manual exclusions used.', 'speculation-pilot' ),
+							atLimit ? el( Fragment, null, ' ', __( 'Unlimited with Pro.', 'speculation-pilot' ), ' ', el( ProBadge ) ) : null
+					  )
+					: null,
 				settings.exclusions.length
 					? el(
 							'ul',
@@ -695,6 +803,8 @@
 
 	function Measurements( props ) {
 		var report = props.report || {};
+		var isPro = config.isPro;
+		var maxRetention = isPro ? 365 : ( config.limits ? config.limits.freeRetentionDays : 7 );
 		var totalPrerenders = ( report.topPaths || [] ).reduce( function ( total, row ) {
 			return total + ( Number( row.prerenders ) || 0 );
 		}, 0 );
@@ -714,13 +824,13 @@
 					},
 				} ),
 				el( TextControl, {
-					label: __( 'Retention days', 'speculation-pilot' ),
+					label: __( 'Retention days', 'speculation-pilot' ) + ( ! isPro ? ' (' + __( 'up to 365 with Pro', 'speculation-pilot' ) + ')' : '' ),
 					type: 'number',
 					min: 1,
-					max: 365,
+					max: maxRetention,
 					value: props.settings.retention_days,
 					onChange: function ( value ) {
-						props.updateSetting( 'retention_days', parseInt( value, 10 ) || 14 );
+						props.updateSetting( 'retention_days', parseInt( value, 10 ) || 7 );
 					},
 				} ),
 				el(
@@ -733,9 +843,10 @@
 							onClick: function () {
 								downloadReportCsv( report );
 							},
-							disabled: ! report.topPaths || ! report.topPaths.length,
+							disabled: ! isPro || ! report.topPaths || ! report.topPaths.length,
 						},
-						__( 'Export CSV', 'speculation-pilot' )
+						__( 'Export CSV', 'speculation-pilot' ),
+						! isPro ? el( ProBadge ) : null
 					),
 					el(
 						Button,
@@ -766,71 +877,77 @@
 				el(
 					'div',
 					{ className: 'speculation-pilot__section' },
-					el( 'h2', null, __( 'Daily p75 duration', 'speculation-pilot' ) ),
-					report.dailySeries && report.dailySeries.length
-						? el( BarChart, {
-								rows: report.dailySeries,
-								labelKey: 'date',
-								valueKey: 'p75Duration',
-								secondaryKey: 'samples',
-								valueFormatter: formatMs,
-						  } )
-						: el( 'div', { className: 'speculation-pilot__empty' }, __( 'No daily trend yet.', 'speculation-pilot' ) )
+					el( 'h2', null, __( 'Daily p75 duration', 'speculation-pilot' ), ! isPro ? el( ProBadge ) : null ),
+					el( ProGate, null,
+						report.dailySeries && report.dailySeries.length
+							? el( BarChart, {
+									rows: report.dailySeries,
+									labelKey: 'date',
+									valueKey: 'p75Duration',
+									secondaryKey: 'samples',
+									valueFormatter: formatMs,
+							  } )
+							: el( 'div', { className: 'speculation-pilot__empty' }, __( 'No daily trend yet.', 'speculation-pilot' ) )
+					)
 				),
 				el(
 					'div',
 					{ className: 'speculation-pilot__section' },
-					el( 'h2', null, __( 'Mode breakdown', 'speculation-pilot' ) ),
-					report.modeBreakdown && report.modeBreakdown.length
-						? el( BarChart, {
-								rows: report.modeBreakdown,
-								labelKey: 'mode',
-								valueKey: 'samples',
-								secondaryKey: 'p75Duration',
-								valueFormatter: function ( value ) {
-									return value + ' ' + __( 'samples', 'speculation-pilot' );
-								},
-								secondaryFormatter: formatMs,
-						  } )
-						: el( 'div', { className: 'speculation-pilot__empty' }, __( 'No mode data yet.', 'speculation-pilot' ) )
+					el( 'h2', null, __( 'Mode breakdown', 'speculation-pilot' ), ! isPro ? el( ProBadge ) : null ),
+					el( ProGate, null,
+						report.modeBreakdown && report.modeBreakdown.length
+							? el( BarChart, {
+									rows: report.modeBreakdown,
+									labelKey: 'mode',
+									valueKey: 'samples',
+									secondaryKey: 'p75Duration',
+									valueFormatter: function ( value ) {
+										return value + ' ' + __( 'samples', 'speculation-pilot' );
+									},
+									secondaryFormatter: formatMs,
+							  } )
+							: el( 'div', { className: 'speculation-pilot__empty' }, __( 'No mode data yet.', 'speculation-pilot' ) )
+					)
 				)
 			),
 			el(
 				'div',
 				{ className: 'speculation-pilot__section' },
-				el( 'h2', null, __( 'Path groups', 'speculation-pilot' ) ),
-				report.pathGroups && report.pathGroups.length
-					? el(
-							'table',
-							{ className: 'speculation-pilot__table' },
-							el(
-								'thead',
-								null,
+				el( 'h2', null, __( 'Path groups', 'speculation-pilot' ), ! isPro ? el( ProBadge ) : null ),
+				el( ProGate, null,
+					report.pathGroups && report.pathGroups.length
+						? el(
+								'table',
+								{ className: 'speculation-pilot__table' },
 								el(
-									'tr',
+									'thead',
 									null,
-									el( 'th', null, __( 'Group', 'speculation-pilot' ) ),
-									el( 'th', null, __( 'Samples', 'speculation-pilot' ) ),
-									el( 'th', null, __( 'p75 duration', 'speculation-pilot' ) ),
-									el( 'th', null, __( 'Prerenders', 'speculation-pilot' ) )
-								)
-							),
-							el(
-								'tbody',
-								null,
-								report.pathGroups.map( function ( row ) {
-									return el(
+									el(
 										'tr',
-										{ key: row.group },
-										el( 'td', null, el( 'code', { className: 'speculation-pilot__code' }, row.group ) ),
-										el( 'td', null, row.samples ),
-										el( 'td', null, formatMs( row.p75Duration ) ),
-										el( 'td', null, row.prerenders )
-									);
-								} )
-							)
-					  )
-					: el( 'div', { className: 'speculation-pilot__empty' }, __( 'No grouped path data yet.', 'speculation-pilot' ) )
+										null,
+										el( 'th', null, __( 'Group', 'speculation-pilot' ) ),
+										el( 'th', null, __( 'Samples', 'speculation-pilot' ) ),
+										el( 'th', null, __( 'p75 duration', 'speculation-pilot' ) ),
+										el( 'th', null, __( 'Prerenders', 'speculation-pilot' ) )
+									)
+								),
+								el(
+									'tbody',
+									null,
+									report.pathGroups.map( function ( row ) {
+										return el(
+											'tr',
+											{ key: row.group },
+											el( 'td', null, el( 'code', { className: 'speculation-pilot__code' }, row.group ) ),
+											el( 'td', null, row.samples ),
+											el( 'td', null, formatMs( row.p75Duration ) ),
+											el( 'td', null, row.prerenders )
+										);
+									} )
+								)
+						  )
+						: el( 'div', { className: 'speculation-pilot__empty' }, __( 'No grouped path data yet.', 'speculation-pilot' ) )
+				)
 			),
 			el(
 				'div',
@@ -959,24 +1076,55 @@
 	}
 
 	function SettingsPanel( props ) {
+		var isPro = config.isPro;
+		var proActive = config.proPluginActive;
+
 		return el(
-			'div',
-			{ className: 'speculation-pilot__section' },
-			el( 'h2', null, __( 'Settings', 'speculation-pilot' ) ),
-			el( ToggleControl, {
-				label: __( 'Delete plugin data on uninstall', 'speculation-pilot' ),
-				checked: !! props.settings.cleanup_on_uninstall,
-				onChange: function ( value ) {
-					props.updateSetting( 'cleanup_on_uninstall', value );
-				},
-			} ),
-			el( ToggleControl, {
-				label: __( 'I understand prerender safety tradeoffs', 'speculation-pilot' ),
-				checked: !! props.settings.prerender_warning_seen,
-				onChange: function ( value ) {
-					props.updateSetting( 'prerender_warning_seen', value );
-				},
-			} )
+			Fragment,
+			null,
+			el(
+				'div',
+				{ className: 'speculation-pilot__section' },
+				el( 'h2', null, __( 'Settings', 'speculation-pilot' ) ),
+				el( ToggleControl, {
+					label: __( 'Delete plugin data on uninstall', 'speculation-pilot' ),
+					checked: !! props.settings.cleanup_on_uninstall,
+					onChange: function ( value ) {
+						props.updateSetting( 'cleanup_on_uninstall', value );
+					},
+				} ),
+				el( ToggleControl, {
+					label: __( 'I understand prerender safety tradeoffs', 'speculation-pilot' ),
+					checked: !! props.settings.prerender_warning_seen,
+					onChange: function ( value ) {
+						props.updateSetting( 'prerender_warning_seen', value );
+					},
+				} )
+			),
+			el(
+				'div',
+				{ className: 'speculation-pilot__section' },
+				el( 'h2', null, __( 'License', 'speculation-pilot' ) ),
+				isPro
+					? el( 'p', null, '✅ ', __( 'Pro license is active. All features are unlocked.', 'speculation-pilot' ) )
+					: proActive
+						? el( 'p', null, __( 'Enter your license key in the Pro plugin settings to activate.', 'speculation-pilot' ) )
+						: el(
+								'div',
+								{ className: 'speculation-pilot__license-panel' },
+								el( 'p', null, __( 'You are using the free version of Speculation Pilot.', 'speculation-pilot' ) ),
+								el( 'p', null, __( 'Upgrade to Pro for WooCommerce presets, 365-day history, advanced reports, PDF exports, and more.', 'speculation-pilot' ) ),
+								el(
+									Button,
+									{
+										variant: 'primary',
+										href: config.upgradeUrl || 'https://speculationpilot.com/pricing/',
+										target: '_blank',
+									},
+									__( 'Get Speculation Pilot Pro →', 'speculation-pilot' )
+								)
+						  )
+			)
 		);
 	}
 
