@@ -1079,6 +1079,103 @@
 		var isPro = config.isPro;
 		var proActive = config.proPluginActive;
 
+		var licenseKeyState = useState( '' );
+		var licenseKey = licenseKeyState[ 0 ];
+		var setLicenseKey = licenseKeyState[ 1 ];
+
+		var licenseBusyState = useState( false );
+		var licenseBusy = licenseBusyState[ 0 ];
+		var setLicenseBusy = licenseBusyState[ 1 ];
+
+		var licenseInfoState = useState( config.license || null );
+		var licenseInfo = licenseInfoState[ 0 ];
+		var setLicenseInfo = licenseInfoState[ 1 ];
+
+		var licenseNoticeState = useState( null );
+		var licenseNotice = licenseNoticeState[ 0 ];
+		var setLicenseNotice = licenseNoticeState[ 1 ];
+
+		function activateLicense() {
+			if ( ! licenseKey.trim() ) {
+				return;
+			}
+			setLicenseBusy( true );
+			setLicenseNotice( null );
+			request( 'license/activate', { method: 'POST', data: { key: licenseKey.trim() } } )
+				.then( function ( response ) {
+					setLicenseInfo( response.license || null );
+					setLicenseNotice( {
+						status: response.success ? 'success' : 'error',
+						message: response.message,
+					} );
+					if ( response.success ) {
+						setLicenseKey( '' );
+						// Reload page to pick up newly-unlocked features.
+						window.location.reload();
+					}
+				} )
+				.catch( function ( error ) {
+					setLicenseNotice( {
+						status: 'error',
+						message: error && error.message ? error.message : __( 'Activation failed.', 'speculation-pilot' ),
+					} );
+				} )
+				.finally( function () {
+					setLicenseBusy( false );
+				} );
+		}
+
+		function deactivateLicense() {
+			if ( ! window.confirm( __( 'Deactivate and remove the license key from this site?', 'speculation-pilot' ) ) ) {
+				return;
+			}
+			setLicenseBusy( true );
+			setLicenseNotice( null );
+			request( 'license/deactivate', { method: 'POST' } )
+				.then( function ( response ) {
+					setLicenseInfo( response.license || null );
+					setLicenseNotice( {
+						status: response.success ? 'success' : 'error',
+						message: response.message,
+					} );
+					// Reload to re-gate features.
+					window.location.reload();
+				} )
+				.catch( function ( error ) {
+					setLicenseNotice( {
+						status: 'error',
+						message: error && error.message ? error.message : __( 'Deactivation failed.', 'speculation-pilot' ),
+					} );
+				} )
+				.finally( function () {
+					setLicenseBusy( false );
+				} );
+		}
+
+		function recheckLicense() {
+			setLicenseBusy( true );
+			setLicenseNotice( null );
+			request( 'license/check', { method: 'POST' } )
+				.then( function ( response ) {
+					setLicenseInfo( response.license || null );
+					setLicenseNotice( {
+						status: response.success ? 'success' : 'warning',
+						message: response.message,
+					} );
+				} )
+				.catch( function ( error ) {
+					setLicenseNotice( {
+						status: 'error',
+						message: error && error.message ? error.message : __( 'Check failed.', 'speculation-pilot' ),
+					} );
+				} )
+				.finally( function () {
+					setLicenseBusy( false );
+				} );
+		}
+
+		var hasKey = licenseInfo && licenseInfo.hasKey;
+
 		return el(
 			Fragment,
 			null,
@@ -1105,25 +1202,142 @@
 				'div',
 				{ className: 'speculation-pilot__section' },
 				el( 'h2', null, __( 'License', 'speculation-pilot' ) ),
-				isPro
-					? el( 'p', null, '✅ ', __( 'Pro license is active. All features are unlocked.', 'speculation-pilot' ) )
-					: proActive
-						? el( 'p', null, __( 'Enter your license key in the Pro plugin settings to activate.', 'speculation-pilot' ) )
-						: el(
-								'div',
-								{ className: 'speculation-pilot__license-panel' },
-								el( 'p', null, __( 'You are using the free version of Speculation Pilot.', 'speculation-pilot' ) ),
-								el( 'p', null, __( 'Upgrade to Pro for WooCommerce presets, 365-day history, advanced reports, PDF exports, and more.', 'speculation-pilot' ) ),
-								el(
-									Button,
-									{
-										variant: 'primary',
-										href: config.upgradeUrl || 'https://speculationpilot.com/pricing/',
-										target: '_blank',
-									},
-									__( 'Get Speculation Pilot Pro →', 'speculation-pilot' )
-								)
-						  )
+				licenseNotice
+					? el(
+							Notice,
+							{
+								status: licenseNotice.status,
+								isDismissible: true,
+								onRemove: function () {
+									setLicenseNotice( null );
+								},
+							},
+							licenseNotice.message
+					  )
+					: null,
+				proActive
+					? el(
+							Fragment,
+							null,
+							isPro
+								? el(
+										Fragment,
+										null,
+										el( 'p', null, '✅ ', __( 'Pro license is active. All features are unlocked.', 'speculation-pilot' ) ),
+										hasKey
+											? el(
+													'div',
+													{ className: 'speculation-pilot__license-panel' },
+													el( 'p', null, __( 'License key:', 'speculation-pilot' ), ' ', el( 'code', { className: 'speculation-pilot__code' }, licenseInfo.maskedKey ) ),
+													licenseInfo.expires && licenseInfo.expires !== 'lifetime'
+														? el( 'p', null, __( 'Expires:', 'speculation-pilot' ), ' ', licenseInfo.expires )
+														: licenseInfo.expires === 'lifetime'
+															? el( 'p', null, __( 'Expires:', 'speculation-pilot' ), ' ', __( 'Lifetime', 'speculation-pilot' ) )
+															: null,
+													licenseInfo.customerEmail
+														? el( 'p', null, __( 'Customer:', 'speculation-pilot' ), ' ', licenseInfo.customerEmail )
+														: null,
+													el(
+														'div',
+														{ className: 'speculation-pilot__toolbar' },
+														el(
+															Button,
+															{
+																variant: 'secondary',
+																onClick: recheckLicense,
+																disabled: licenseBusy,
+																isBusy: licenseBusy,
+															},
+															__( 'Re-check', 'speculation-pilot' )
+														),
+														el(
+															Button,
+															{
+																variant: 'secondary',
+																isDestructive: true,
+																onClick: deactivateLicense,
+																disabled: licenseBusy,
+															},
+															__( 'Deactivate', 'speculation-pilot' )
+														)
+													)
+											  )
+											: null
+								  )
+								: el(
+										'div',
+										{ className: 'speculation-pilot__license-panel' },
+										hasKey
+											? el(
+													Fragment,
+													null,
+													el( 'p', null, '⚠️ ', __( 'License key is present but not valid.', 'speculation-pilot' ), ' ', el( 'code', { className: 'speculation-pilot__code' }, licenseInfo.maskedKey ), ' — ', __( 'Status:', 'speculation-pilot' ), ' ', licenseInfo.status ),
+													el(
+														'div',
+														{ className: 'speculation-pilot__toolbar' },
+														el(
+															Button,
+															{
+																variant: 'secondary',
+																onClick: recheckLicense,
+																disabled: licenseBusy,
+																isBusy: licenseBusy,
+															},
+															__( 'Re-check', 'speculation-pilot' )
+														),
+														el(
+															Button,
+															{
+																variant: 'secondary',
+																isDestructive: true,
+																onClick: deactivateLicense,
+																disabled: licenseBusy,
+															},
+															__( 'Remove key', 'speculation-pilot' )
+														)
+													)
+											  )
+											: null,
+										el( 'p', null, __( 'Enter your license key to unlock all Pro features.', 'speculation-pilot' ) ),
+										el(
+											'div',
+											{ className: 'speculation-pilot__toolbar' },
+											el( TextControl, {
+												label: __( 'License key', 'speculation-pilot' ),
+												hideLabelFromVision: true,
+												placeholder: 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx',
+												value: licenseKey,
+												onChange: setLicenseKey,
+												disabled: licenseBusy,
+											} ),
+											el(
+												Button,
+												{
+													variant: 'primary',
+													onClick: activateLicense,
+													disabled: licenseBusy || ! licenseKey.trim(),
+													isBusy: licenseBusy,
+												},
+												__( 'Activate', 'speculation-pilot' )
+											)
+										)
+								  )
+					  )
+					: el(
+							'div',
+							{ className: 'speculation-pilot__license-panel' },
+							el( 'p', null, __( 'You are using the free version of Speculation Pilot.', 'speculation-pilot' ) ),
+							el( 'p', null, __( 'Upgrade to Pro for WooCommerce presets, 365-day history, advanced reports, PDF exports, and more.', 'speculation-pilot' ) ),
+							el(
+								Button,
+								{
+									variant: 'primary',
+									href: config.upgradeUrl || 'https://speculationpilot.com/pricing/',
+									target: '_blank',
+								},
+								__( 'Get Speculation Pilot Pro →', 'speculation-pilot' )
+							)
+					  )
 			)
 		);
 	}

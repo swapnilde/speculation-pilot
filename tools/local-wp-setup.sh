@@ -26,6 +26,13 @@ fi
 docker compose run --rm wpcli wp rewrite structure '/%postname%/' --hard
 docker compose run --rm wpcli wp plugin activate speculation-pilot
 
+# Activate Pro plugin if present.
+if docker compose run --rm wpcli wp plugin list --field=name 2>/dev/null | grep -q 'speculation-pilot-pro'; then
+	docker compose run --rm wpcli wp plugin activate speculation-pilot-pro
+	# Enable dev license bypass for local testing via mu-plugin.
+	docker compose exec -T wordpress bash -c "mkdir -p /var/www/html/wp-content/mu-plugins && echo \"<?php define('SPECULATION_PILOT_PRO_DEV_LICENSE', true);\" > /var/www/html/wp-content/mu-plugins/sp-dev-license.php"
+fi
+
 docker compose run --rm wpcli wp eval '
 $settings = \SpeculationPilot\Settings::defaults();
 $settings["measurement_enabled"] = true;
