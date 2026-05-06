@@ -852,6 +852,18 @@
 						Button,
 						{
 							variant: 'secondary',
+							onClick: function () {
+								downloadPdf();
+							},
+							disabled: ! isPro || ! report.sampleCount,
+						},
+						__( 'Download PDF', 'speculation-pilot' ),
+						! isPro ? el( ProBadge ) : null
+					),
+					el(
+						Button,
+						{
+							variant: 'secondary',
 							isDestructive: true,
 							onClick: props.onClear,
 							disabled: ! report.sampleCount,
@@ -1071,7 +1083,8 @@
 							} )
 					  )
 					: el( 'div', { className: 'speculation-pilot__empty' }, __( 'No selector preview is available.', 'speculation-pilot' ) )
-			)
+			),
+			config.isPro ? el( SiteAudit ) : el( ProGate, null, el( SiteAudit ) )
 		);
 	}
 
@@ -1198,6 +1211,7 @@
 					},
 				} )
 			),
+			config.isPro ? el( EmailSettings ) : el( ProGate, null, el( EmailSettings ) ),
 			el(
 				'div',
 				{ className: 'speculation-pilot__section' },
@@ -1338,6 +1352,200 @@
 								__( 'Get Speculation Pilot Pro →', 'speculation-pilot' )
 							)
 					  )
+			)
+		);
+	}
+
+	function downloadPdf() {
+		request( 'pro/report/pdf' )
+			.then( function ( response ) {
+				if ( response.success && response.url ) {
+					var link = document.createElement( 'a' );
+					link.href = response.url;
+					link.download = response.filename || 'speculation-pilot-report.pdf';
+					document.body.appendChild( link );
+					link.click();
+					document.body.removeChild( link );
+				} else {
+					window.alert( response.message || __( 'PDF generation failed.', 'speculation-pilot' ) );
+				}
+			} )
+			.catch( function ( error ) {
+				window.alert( error && error.message ? error.message : __( 'PDF generation failed.', 'speculation-pilot' ) );
+			} );
+	}
+
+	function SiteAudit() {
+		var auditState = useState( null );
+		var audit = auditState[ 0 ];
+		var setAudit = auditState[ 1 ];
+
+		var loadingState = useState( false );
+		var auditLoading = loadingState[ 0 ];
+		var setAuditLoading = loadingState[ 1 ];
+
+		function runAudit() {
+			setAuditLoading( true );
+			request( 'pro/audit' )
+				.then( function ( response ) {
+					setAudit( response );
+				} )
+				.catch( function () {
+					setAudit( null );
+				} )
+				.finally( function () {
+					setAuditLoading( false );
+				} );
+		}
+
+		var severityColors = { OK: '#00a32a', INFO: '#2271b1', WARNING: '#dba617', ERROR: '#d63638' };
+
+		return el(
+			'div',
+			{ className: 'speculation-pilot__section' },
+			el( 'h2', null, __( 'Site Audit', 'speculation-pilot' ), ' ', el( ProBadge ) ),
+			el( 'p', null, __( 'Run a comprehensive site audit to check your environment, configuration, exclusions, and content volume.', 'speculation-pilot' ) ),
+			el(
+				Button,
+				{
+					variant: 'secondary',
+					onClick: runAudit,
+					isBusy: auditLoading,
+					disabled: auditLoading,
+				},
+				auditLoading ? __( 'Running audit...', 'speculation-pilot' ) : __( 'Run site audit', 'speculation-pilot' )
+			),
+			audit
+				? el(
+						Fragment,
+						null,
+						el( 'p', { style: { marginTop: '12px' } },
+							__( 'Overall:', 'speculation-pilot' ), ' ',
+							el( 'strong', { style: { color: severityColors[ audit.status ] || '#1d2327' } }, audit.status )
+						),
+						el(
+							'table',
+							{ className: 'speculation-pilot__table', style: { marginTop: '12px' } },
+							el( 'thead', null, el( 'tr', null,
+								el( 'th', null, __( 'Check', 'speculation-pilot' ) ),
+								el( 'th', null, __( 'Status', 'speculation-pilot' ) ),
+								el( 'th', null, __( 'Details', 'speculation-pilot' ) )
+							) ),
+							el( 'tbody', null,
+								( audit.checks || [] ).map( function ( check ) {
+									return el( 'tr', { key: check.key },
+										el( 'td', null, el( 'strong', null, check.title ) ),
+										el( 'td', null, el( 'span', { style: { color: severityColors[ check.severity ] || '#1d2327', fontWeight: 600 } }, check.severity ) ),
+										el( 'td', null, check.details )
+									);
+								} )
+							)
+						)
+				  )
+				: null
+		);
+	}
+
+	function EmailSettings() {
+		var emailState = useState( { email_enabled: false, email_recipients: '', email_frequency: 'weekly', email_branding: true } );
+		var email = emailState[ 0 ];
+		var setEmail = emailState[ 1 ];
+
+		var loadedState = useState( false );
+		var loaded = loadedState[ 0 ];
+		var setLoaded = loadedState[ 1 ];
+
+		var busyState = useState( false );
+		var busy = busyState[ 0 ];
+		var setBusy = busyState[ 1 ];
+
+		var noticeState = useState( null );
+		var emailNotice = noticeState[ 0 ];
+		var setEmailNotice = noticeState[ 1 ];
+
+		useEffect( function () {
+			request( 'pro/email/settings' )
+				.then( function ( response ) {
+					setEmail( response );
+					setLoaded( true );
+				} )
+				.catch( function () {
+					setLoaded( true );
+				} );
+		}, [] );
+
+		function saveEmail() {
+			setBusy( true );
+			setEmailNotice( null );
+			request( 'pro/email/settings', { method: 'POST', data: email } )
+				.then( function ( response ) {
+					setEmail( response );
+					setEmailNotice( { status: 'success', message: __( 'Email settings saved.', 'speculation-pilot' ) } );
+				} )
+				.catch( function ( error ) {
+					setEmailNotice( { status: 'error', message: error && error.message ? error.message : __( 'Failed to save.', 'speculation-pilot' ) } );
+				} )
+				.finally( function () {
+					setBusy( false );
+				} );
+		}
+
+		function sendTest() {
+			setBusy( true );
+			setEmailNotice( null );
+			request( 'pro/email/test', { method: 'POST' } )
+				.then( function ( response ) {
+					setEmailNotice( { status: response.success ? 'success' : 'error', message: response.message } );
+				} )
+				.catch( function ( error ) {
+					setEmailNotice( { status: 'error', message: error && error.message ? error.message : __( 'Send failed.', 'speculation-pilot' ) } );
+				} )
+				.finally( function () {
+					setBusy( false );
+				} );
+		}
+
+		if ( ! loaded ) {
+			return el( 'div', { className: 'speculation-pilot__section' }, el( Spinner ), ' ', __( 'Loading email settings...', 'speculation-pilot' ) );
+		}
+
+		return el(
+			'div',
+			{ className: 'speculation-pilot__section' },
+			el( 'h2', null, __( 'Email Reports', 'speculation-pilot' ), ' ', el( ProBadge ) ),
+			emailNotice
+				? el( Notice, { status: emailNotice.status, isDismissible: true, onRemove: function () { setEmailNotice( null ); } }, emailNotice.message )
+				: null,
+			el( ToggleControl, {
+				label: __( 'Enable scheduled email reports', 'speculation-pilot' ),
+				checked: !! email.email_enabled,
+				onChange: function ( val ) { setEmail( Object.assign( {}, email, { email_enabled: val } ) ); },
+			} ),
+			el( TextControl, {
+				label: __( 'Recipients (comma-separated)', 'speculation-pilot' ),
+				value: email.email_recipients || '',
+				placeholder: 'admin@example.com',
+				onChange: function ( val ) { setEmail( Object.assign( {}, email, { email_recipients: val } ) ); },
+			} ),
+			el( SelectControl, {
+				label: __( 'Frequency', 'speculation-pilot' ),
+				value: email.email_frequency || 'weekly',
+				options: [
+					{ label: __( 'Weekly', 'speculation-pilot' ), value: 'weekly' },
+					{ label: __( 'Monthly', 'speculation-pilot' ), value: 'monthly' },
+				],
+				onChange: function ( val ) { setEmail( Object.assign( {}, email, { email_frequency: val } ) ); },
+			} ),
+			el( ToggleControl, {
+				label: __( 'Include "Powered by Speculation Pilot Pro" branding', 'speculation-pilot' ),
+				checked: !! email.email_branding,
+				onChange: function ( val ) { setEmail( Object.assign( {}, email, { email_branding: val } ) ); },
+			} ),
+			el(
+				'div',
+				{ className: 'speculation-pilot__toolbar' },
+				el( Button, { variant: 'primary', onClick: saveEmail, isBusy: busy, disabled: busy }, __( 'Save email settings', 'speculation-pilot' ) ),
+				el( Button, { variant: 'secondary', onClick: sendTest, disabled: busy }, __( 'Send test email', 'speculation-pilot' ) )
 			)
 		);
 	}
