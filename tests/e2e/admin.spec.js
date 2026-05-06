@@ -19,11 +19,11 @@ test.describe( 'Speculation Pilot admin', () => {
 		await expect( page.getByRole( 'heading', { name: 'Speculation Pilot' } ) ).toBeVisible();
 		await expect( page.getByText( 'Current mode' ) ).toBeVisible();
 
-		await page.getByRole( 'button', { name: 'Diagnostics' } ).click();
+		await page.getByRole( 'button', { name: 'Diagnostics', exact: true } ).click();
 		await expect( page.getByText( 'Overall status' ) ).toBeVisible();
 		await expect( page.getByText( 'Link opt-out selectors' ) ).toBeVisible();
 
-		await page.getByRole( 'button', { name: 'Measurements' } ).click();
+		await page.getByRole( 'button', { name: 'Measurements', exact: true } ).click();
 		await expect( page.getByText( 'Daily p75 duration' ) ).toBeVisible();
 		await expect( page.getByText( 'Path groups' ) ).toBeVisible();
 	} );
@@ -39,7 +39,7 @@ test.describe( 'Speculation Pilot admin', () => {
 		await login( page );
 		await page.goto( '/wp-admin/options-general.php?page=speculation-pilot' );
 
-		await page.getByRole( 'button', { name: 'Settings' } ).click();
+		await page.getByRole( 'button', { name: 'Settings', exact: true } ).click();
 		await expect( page.getByRole( 'heading', { name: 'License' } ) ).toBeVisible();
 	} );
 
@@ -47,17 +47,17 @@ test.describe( 'Speculation Pilot admin', () => {
 		await login( page );
 		await page.goto( '/wp-admin/options-general.php?page=speculation-pilot' );
 
-		await page.getByRole( 'button', { name: 'Exclusions' } ).click();
+		await page.getByRole( 'button', { name: 'Exclusions', exact: true } ).click();
 		await expect( page.getByText( 'Integration presets' ) ).toBeVisible();
 		await expect( page.getByText( 'WooCommerce' ) ).toBeVisible();
-		await expect( page.getByText( 'Manual exclusions' ) ).toBeVisible();
+		await expect( page.getByText( 'Manual exclusions', { exact: true } ) ).toBeVisible();
 	} );
 
 	test( 'measurements tab shows retention and CSV controls', async ( { page } ) => {
 		await login( page );
 		await page.goto( '/wp-admin/options-general.php?page=speculation-pilot' );
 
-		await page.getByRole( 'button', { name: 'Measurements' } ).click();
+		await page.getByRole( 'button', { name: 'Measurements', exact: true } ).click();
 		await expect( page.getByText( 'Retention days' ) ).toBeVisible();
 		await expect( page.getByText( 'Export CSV' ) ).toBeVisible();
 	} );
