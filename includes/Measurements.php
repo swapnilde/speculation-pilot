@@ -620,7 +620,7 @@ final class Measurements {
 	 * @param int              $percentile Percentile.
 	 * @return float|null
 	 */
-	private static function percentile( array $values, int $percentile ) {
+	public static function percentile( array $values, int $percentile ) {
 		if ( empty( $values ) ) {
 			return null;
 		}

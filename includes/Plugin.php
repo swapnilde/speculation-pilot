@@ -62,6 +62,33 @@ final class Plugin {
 	}
 
 	/**
+	 * Returns the Settings service.
+	 *
+	 * @return Settings
+	 */
+	public function settings(): Settings {
+		return $this->settings;
+	}
+
+	/**
+	 * Returns the SafetyEngine service.
+	 *
+	 * @return SafetyEngine
+	 */
+	public function safety(): SafetyEngine {
+		return $this->safety;
+	}
+
+	/**
+	 * Returns the Measurements service.
+	 *
+	 * @return Measurements
+	 */
+	public function measurements(): Measurements {
+		return $this->measurements;
+	}
+
+	/**
 	 * Boots all services.
 	 */
 	public function boot(): void {
