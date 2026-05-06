@@ -31,6 +31,11 @@ if docker compose run --rm wpcli wp plugin list --field=name 2>/dev/null | grep 
 	docker compose run --rm wpcli wp plugin activate speculation-pilot-pro
 	# Enable dev license bypass for local testing via mu-plugin.
 	docker compose exec -T wordpress bash -c "mkdir -p /var/www/html/wp-content/mu-plugins && echo \"<?php define('SPECULATION_PILOT_PRO_DEV_LICENSE', true);\" > /var/www/html/wp-content/mu-plugins/sp-dev-license.php"
+	# Install Composer dependencies (DomPDF) if composer.json exists.
+	if docker compose exec -T wordpress test -f /var/www/html/wp-content/plugins/speculation-pilot-pro/composer.json; then
+		echo "Installing Pro plugin Composer dependencies..."
+		docker compose exec -T wordpress bash -c "cd /var/www/html/wp-content/plugins/speculation-pilot-pro && composer install --no-dev --no-interaction --optimize-autoloader 2>/dev/null || echo 'Composer not available in container — run manually.'"
+	fi
 fi
 
 docker compose run --rm wpcli wp eval '

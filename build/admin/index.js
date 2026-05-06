@@ -179,7 +179,7 @@
 				cache: false,
 			},
 			measurement_enabled: false,
-			retention_days: 14,
+			retention_days: 7,
 			cleanup_on_uninstall: false,
 			prerender_warning_seen: false,
 		};
@@ -274,7 +274,7 @@
 					preset: key,
 					mode: preset.mode,
 					eagerness: preset.eagerness,
-					prerender_warning_seen: key === 'aggressive_lab' ? settings.prerender_warning_seen : true,
+					prerender_warning_seen: settings.prerender_warning_seen,
 				} )
 			);
 		}
@@ -1387,6 +1387,10 @@
 
 	var root = document.getElementById( 'speculation-pilot-admin-root' );
 	if ( root ) {
-		wp.element.render( el( App ), root );
+		if ( wp.element.createRoot ) {
+			wp.element.createRoot( root ).render( el( App ) );
+		} else {
+			wp.element.render( el( App ), root );
+		}
 	}
 } )( window.wp, window.SpeculationPilotAdmin );

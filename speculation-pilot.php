@@ -1,11 +1,11 @@
 <?php
 /**
  * Plugin Name: Speculation Pilot
- * Plugin URI:  https://example.com/speculation-pilot
+ * Plugin URI:  https://speculationpilot.com
  * Description: Safely configure, diagnose, and measure WordPress speculative loading.
  * Version:     0.3.0
  * Author:      Speculation Pilot
- * Author URI:  https://example.com
+ * Author URI:  https://speculationpilot.com
  * Text Domain: speculation-pilot
  * Requires at least: 6.8
  * Requires PHP: 7.4

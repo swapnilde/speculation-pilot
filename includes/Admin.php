@@ -84,32 +84,35 @@ final class Admin {
 			SPECULATION_PILOT_VERSION
 		);
 
+		$admin_config = apply_filters(
+			'speculation_pilot_admin_config',
+			array(
+				'root'            => esc_url_raw( rest_url( 'speculation-pilot/v1/' ) ),
+				'nonce'           => wp_create_nonce( 'wp_rest' ),
+				'adminUrl'        => esc_url_raw( admin_url( 'options-general.php?page=speculation-pilot' ) ),
+				'version'         => SPECULATION_PILOT_VERSION,
+				'isPro'           => (bool) apply_filters( 'speculation_pilot_is_pro', false ),
+				'upgradeUrl'      => esc_url_raw( (string) apply_filters( 'speculation_pilot_upgrade_url', 'https://speculationpilot.com/pricing/' ) ),
+				'proPluginActive' => (bool) apply_filters( 'speculation_pilot_pro_active', false ),
+				'limits'          => array(
+					'freeRetentionDays' => SPECULATION_PILOT_FREE_RETENTION_DAYS,
+					'freeMaxExclusions' => SPECULATION_PILOT_FREE_MAX_EXCLUSIONS,
+					'freeMaxTopPaths'   => SPECULATION_PILOT_FREE_MAX_TOP_PATHS,
+				),
+				'constants' => array(
+					'modes'      => Settings::MODES,
+					'eagerness'  => Settings::EAGERNESS,
+					'presets'    => Settings::PRESETS,
+					'minWp'      => SPECULATION_PILOT_MIN_WP,
+					'minPhp'     => SPECULATION_PILOT_MIN_PHP,
+					'optionName' => SPECULATION_PILOT_OPTION,
+				),
+			)
+		);
+
 		wp_add_inline_script(
 			'speculation-pilot-admin',
-			'window.SpeculationPilotAdmin = ' . wp_json_encode(
-				array(
-					'root'            => esc_url_raw( rest_url( 'speculation-pilot/v1/' ) ),
-					'nonce'           => wp_create_nonce( 'wp_rest' ),
-					'adminUrl'        => esc_url_raw( admin_url( 'options-general.php?page=speculation-pilot' ) ),
-					'version'         => SPECULATION_PILOT_VERSION,
-					'isPro'           => (bool) apply_filters( 'speculation_pilot_is_pro', false ),
-					'upgradeUrl'      => esc_url_raw( (string) apply_filters( 'speculation_pilot_upgrade_url', 'https://speculationpilot.com/pricing/' ) ),
-					'proPluginActive' => (bool) apply_filters( 'speculation_pilot_pro_active', false ),
-					'limits'          => array(
-						'freeRetentionDays' => SPECULATION_PILOT_FREE_RETENTION_DAYS,
-						'freeMaxExclusions' => SPECULATION_PILOT_FREE_MAX_EXCLUSIONS,
-						'freeMaxTopPaths'   => SPECULATION_PILOT_FREE_MAX_TOP_PATHS,
-					),
-					'constants' => array(
-						'modes'      => Settings::MODES,
-						'eagerness'  => Settings::EAGERNESS,
-						'presets'    => Settings::PRESETS,
-						'minWp'      => SPECULATION_PILOT_MIN_WP,
-						'minPhp'     => SPECULATION_PILOT_MIN_PHP,
-						'optionName' => SPECULATION_PILOT_OPTION,
-					),
-				)
-			) . ';',
+			'window.SpeculationPilotAdmin = ' . wp_json_encode( $admin_config ) . ';',
 			'before'
 		);
 	}
