@@ -27,5 +27,38 @@ test.describe( 'Speculation Pilot admin', () => {
 		await expect( page.getByText( 'Daily p75 duration' ) ).toBeVisible();
 		await expect( page.getByText( 'Path groups' ) ).toBeVisible();
 	} );
-} );
 
+	test( 'shows Plan metric on overview', async ( { page } ) => {
+		await login( page );
+		await page.goto( '/wp-admin/options-general.php?page=speculation-pilot' );
+
+		await expect( page.getByText( 'Plan' ) ).toBeVisible();
+	} );
+
+	test( 'shows License section in settings tab', async ( { page } ) => {
+		await login( page );
+		await page.goto( '/wp-admin/options-general.php?page=speculation-pilot' );
+
+		await page.getByRole( 'button', { name: 'Settings' } ).click();
+		await expect( page.getByRole( 'heading', { name: 'License' } ) ).toBeVisible();
+	} );
+
+	test( 'shows integration presets on exclusions tab', async ( { page } ) => {
+		await login( page );
+		await page.goto( '/wp-admin/options-general.php?page=speculation-pilot' );
+
+		await page.getByRole( 'button', { name: 'Exclusions' } ).click();
+		await expect( page.getByText( 'Integration presets' ) ).toBeVisible();
+		await expect( page.getByText( 'WooCommerce' ) ).toBeVisible();
+		await expect( page.getByText( 'Manual exclusions' ) ).toBeVisible();
+	} );
+
+	test( 'measurements tab shows retention and CSV controls', async ( { page } ) => {
+		await login( page );
+		await page.goto( '/wp-admin/options-general.php?page=speculation-pilot' );
+
+		await page.getByRole( 'button', { name: 'Measurements' } ).click();
+		await expect( page.getByText( 'Retention days' ) ).toBeVisible();
+		await expect( page.getByText( 'Export CSV' ) ).toBeVisible();
+	} );
+} );
