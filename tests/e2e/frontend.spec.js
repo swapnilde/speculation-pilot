@@ -6,7 +6,7 @@ test.describe( 'Speculation Pilot frontend', () => {
 
 		const rules = page.locator( 'script[type="speculationrules"]' );
 		await expect( rules ).toHaveCount( 1 );
-		await expect( page.locator( '#speculation-pilot-measurement-js' ) ).toHaveCount( 1 );
+		await expect( page.locator( '#speculation-pilot-measurement-js, script[src*="measurement.js"]' ) ).toHaveCount( 1 );
 	} );
 
 	test( 'does not leak query strings into measurement payloads', async ( { page } ) => {

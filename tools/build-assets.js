@@ -20,6 +20,14 @@ const files = [
 		from: 'src/frontend/measurement.js',
 		to: 'build/frontend/measurement.js',
 	},
+	{
+		from: 'src/frontend/admin-bar-debugger.js',
+		to: 'build/frontend/admin-bar-debugger.js',
+	},
+	{
+		from: 'src/frontend/admin-bar-debugger.css',
+		to: 'build/frontend/admin-bar-debugger.css',
+	},
 ];
 
 function copyFile( item ) {
@@ -58,8 +66,22 @@ return array(
 );
 `;
 
+	const debugAsset = `<?php
+/**
+ * Frontend debug asset metadata.
+ *
+ * @package SpeculationPilot
+ */
+
+return array(
+\t'dependencies' => array(),
+\t'version'      => '${ version }',
+);
+`;
+
 	fs.writeFileSync( path.join( root, 'build/admin/index.asset.php' ), adminAsset );
 	fs.writeFileSync( path.join( root, 'build/frontend/measurement.asset.php' ), frontendAsset );
+	fs.writeFileSync( path.join( root, 'build/frontend/admin-bar-debugger.asset.php' ), debugAsset );
 }
 
 function build() {

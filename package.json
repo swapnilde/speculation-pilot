@@ -8,15 +8,17 @@
     "start": "node tools/build-assets.js --watch",
     "test": "node tools/smoke-test.js",
     "qa:up": "docker compose up -d",
-    "qa:setup": "bash tools/local-wp-setup.sh",
-    "qa:start": "npm run qa:up && npm run qa:setup",
-    "qa:stop": "docker compose down --rmi all",
-    "qa:restart": "npm run qa:stop && npm run qa:start",
+    "qa:setup": "node tools/setup-qa.js",
+    "qa:start": "node tools/setup-qa.js",
+    "qa:stop": "docker compose down --volumes --remove-orphans",
+    "qa:restart": "docker compose down --volumes --remove-orphans && node tools/setup-qa.js",
     "test:e2e": "playwright test",
     "lint:js": "wp-scripts lint-js src build",
     "lint:css": "wp-scripts lint-style src build",
     "format": "wp-scripts format-js src build",
-    "plugin-zip": "node tools/package-plugin.js"
+    "check:all": "npm run lint:js && npm run lint:css",
+    "plugin-zip": "node tools/package-plugin.js",
+    "build:zip": "npm run build && node tools/package-plugin.js"
   },
   "devDependencies": {
     "@playwright/test": "^1.56.0",

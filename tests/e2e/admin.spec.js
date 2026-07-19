@@ -43,7 +43,7 @@ test.describe( 'Speculation Pilot admin', () => {
 		await expect( page.getByRole( 'heading', { name: 'License' } ) ).toBeVisible();
 	} );
 
-	test( 'shows integration presets on exclusions tab', async ( { page } ) => {
+	test( 'shows integration presets and quick suggestions on exclusions tab', async ( { page } ) => {
 		await login( page );
 		await page.goto( '/wp-admin/options-general.php?page=speculation-pilot' );
 
@@ -51,6 +51,15 @@ test.describe( 'Speculation Pilot admin', () => {
 		await expect( page.getByText( 'Integration presets' ) ).toBeVisible();
 		await expect( page.getByText( 'WooCommerce' ) ).toBeVisible();
 		await expect( page.getByText( 'Manual exclusions', { exact: true } ) ).toBeVisible();
+		await expect( page.getByText( 'Quick suggestions:' ) ).toBeVisible();
+	} );
+
+	test( 'displays Speculation Pilot Admin Bar Debugger node for logged-in admin', async ( { page } ) => {
+		await login( page );
+		await page.goto( '/sample-page/' );
+
+		await expect( page.locator( '#wp-admin-bar-speculation-pilot' ) ).toBeVisible();
+		await expect( page.locator( '#wp-admin-bar-speculation-pilot' ) ).toContainText( 'Speculation Pilot' );
 	} );
 
 	test( 'measurements tab shows retention and CSV controls', async ( { page } ) => {

@@ -97,6 +97,6 @@ The `doctor` command supports `--format=json` and `--fail-on-warning` for CI wor
 ## QA Tooling
 
 - `docker-compose.yml` runs a disposable WordPress 6.8 + MariaDB site.
-- `tools/local-wp-setup.sh` installs WordPress, activates the plugin, enables measurement, creates QA pages, and runs `wp speculation-pilot doctor`.
+- `tools/setup-qa.js` installs WordPress cross-platform, activates plugins, enables measurement, creates QA pages, and runs `wp speculation-pilot doctor`.
 - `tests/e2e` contains Playwright checks for the admin app and logged-out frontend behavior.
 - `tools/smoke-test.js` verifies required files, synced build assets, package versions, PNG assets, and privacy-sensitive frontend tokens.

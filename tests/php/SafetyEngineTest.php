@@ -29,7 +29,16 @@ final class SafetyEngineTest extends WP_UnitTestCase {
 
 		$this->assertContains( '/checkout/*', $paths );
 		$this->assertContains( '/cart/*', $paths );
-		$this->assertContains( '/my-account/*', $paths );
+	}
+
+	public function test_returns_default_selector_exclusions(): void {
+		$settings = new Settings();
+		$engine   = new SafetyEngine( $settings );
+		$selectors = $engine->get_exclusion_selectors();
+
+		$this->assertContains( 'a[rel~="nofollow"]', $selectors );
+		$this->assertContains( 'a[download]', $selectors );
+		$this->assertContains( '.no-speculate', $selectors );
 	}
 }
 

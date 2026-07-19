@@ -22,6 +22,7 @@ const requiredFiles = [
 	'includes/Cli.php',
 	'docker-compose.yml',
 	'playwright.config.js',
+	'tools/setup-qa.js',
 	'tools/package-plugin.js',
 	'languages/speculation-pilot.pot',
 	'build/admin/index.js',
