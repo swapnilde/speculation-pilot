@@ -1,0 +1,22 @@
+/**
+ * Speculation Pilot — Admin Bar Live Debugger CSS.
+ */
+
+#wp-admin-bar-speculation-pilot .ab-icon::before {
+	content: "\f226";
+	top: 2px;
+}
+
+#wp-admin-bar-speculation-pilot #sp-debug-status {
+	font-weight: 600;
+	color: #72aee6;
+}
+
+#wp-admin-bar-speculation-pilot #sp-debug-route {
+	color: #f0f6fc;
+}
+
+#wp-admin-bar-speculation-pilot #sp-debug-links {
+	color: #c3c4c7;
+	font-size: 11px;
+}

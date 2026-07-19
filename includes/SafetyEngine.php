@@ -62,6 +62,23 @@ final class SafetyEngine {
 	}
 
 	/**
+	 * Returns default CSS selector exclusions.
+	 *
+	 * @return array<int, string>
+	 */
+	public function get_exclusion_selectors(): array {
+		return array(
+			'a[rel~="nofollow"]',
+			'a[download]',
+			'.no-speculate',
+			'[data-no-speculate]',
+			'.no-prerender',
+			'[data-no-prerender]',
+			'#wpadminbar a',
+		);
+	}
+
+	/**
 	 * Returns grouped exclusions with metadata.
 	 *
 	 * @param string $mode Current mode.

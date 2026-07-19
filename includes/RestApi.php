@@ -142,6 +142,16 @@ final class RestApi {
 				'permission_callback' => '__return_true',
 			)
 		);
+
+		register_rest_route(
+			self::NAMESPACE,
+			'/routes/suggestions',
+			array(
+				'methods'             => 'GET',
+				'callback'            => array( $this, 'get_route_suggestions' ),
+				'permission_callback' => array( $this, 'can_manage' ),
+			)
+		);
 	}
 
 	/**
@@ -289,5 +299,53 @@ final class RestApi {
 		}
 
 		return 400;
+	}
+
+	/**
+	 * Returns suggested exclusion path patterns.
+	 */
+	public function get_route_suggestions(): WP_REST_Response {
+		$suggestions = array(
+			array(
+				'path'  => '/cart/*',
+				'label' => __( 'Cart Pages', 'speculation-pilot' ),
+			),
+			array(
+				'path'  => '/checkout/*',
+				'label' => __( 'Checkout Pages', 'speculation-pilot' ),
+			),
+			array(
+				'path'  => '/my-account/*',
+				'label' => __( 'Account Pages', 'speculation-pilot' ),
+			),
+			array(
+				'path'  => '/login/*',
+				'label' => __( 'Login Routes', 'speculation-pilot' ),
+			),
+			array(
+				'path'  => '/search/*',
+				'label' => __( 'Search Pages', 'speculation-pilot' ),
+			),
+			array(
+				'path'  => '/*\?*s=*',
+				'label' => __( 'Search Query Strings', 'speculation-pilot' ),
+			),
+			array(
+				'path'  => '/*\?*add-to-cart*',
+				'label' => __( 'Add-To-Cart Links', 'speculation-pilot' ),
+			),
+		);
+
+		$post_types = get_post_types( array( 'public' => true ), 'objects' );
+		foreach ( $post_types as $pt ) {
+			if ( ! empty( $pt->rewrite['slug'] ) && 'post' !== $pt->name && 'page' !== $pt->name ) {
+				$suggestions[] = array(
+					'path'  => '/' . trim( (string) $pt->rewrite['slug'], '/' ) . '/*',
+					'label' => sprintf( __( '%s Archive Paths', 'speculation-pilot' ), $pt->labels->singular_name ),
+				);
+			}
+		}
+
+		return rest_ensure_response( array( 'suggestions' => $suggestions ) );
 	}
 }

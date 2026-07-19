@@ -44,6 +44,7 @@ final class CoreIntegration {
 	public function register(): void {
 		add_filter( 'wp_speculation_rules_configuration', array( $this, 'filter_configuration' ) );
 		add_filter( 'wp_speculation_rules_href_exclude_paths', array( $this, 'filter_exclude_paths' ), 10, 2 );
+		add_filter( 'wp_speculation_rules_no_selector_matches', array( $this, 'filter_exclude_selectors' ), 10, 2 );
 	}
 
 	/**
@@ -105,6 +106,30 @@ final class CoreIntegration {
 				array_merge(
 					$paths,
 					$this->safety->get_exclusion_paths( $mode )
+				)
+			)
+		);
+	}
+
+	/**
+	 * Adds plugin-managed selector exclusion rules.
+	 *
+	 * @param array<int, string> $selectors Existing CSS selectors.
+	 * @param string             $mode Current mode.
+	 * @return array<int, string>
+	 */
+	public function filter_exclude_selectors( array $selectors, string $mode ): array {
+		$settings = $this->settings->get();
+
+		if ( empty( $settings['enabled'] ) || 'disabled' === $settings['mode'] ) {
+			return $selectors;
+		}
+
+		return array_values(
+			array_unique(
+				array_merge(
+					$selectors,
+					$this->safety->get_exclusion_selectors()
 				)
 			)
 		);

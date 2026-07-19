@@ -126,6 +126,20 @@ final class Diagnostics {
 			);
 		}
 
+		$conflict_plugins = $this->get_active_prefetch_conflict_plugins();
+		if ( ! empty( $conflict_plugins ) ) {
+			$items[] = array(
+				'key'     => 'prefetch_conflicts',
+				'status'  => 'warning',
+				'label'   => __( 'Legacy prefetch plugin conflict', 'speculation-pilot' ),
+				'message' => sprintf(
+					/* translators: %s: comma-separated plugin names. */
+					__( 'Detected legacy prefetching plugins: %s. Running client-side JS prefetchers alongside Speculation Pilot can cause duplicate network requests. Consider disabling legacy prefetch plugins.', 'speculation-pilot' ),
+					implode( ', ', $conflict_plugins )
+				),
+			);
+		}
+
 		if ( empty( $settings['enabled'] ) || 'disabled' === $settings['mode'] ) {
 			$items[] = array(
 				'key'     => 'plugin_mode',
@@ -264,6 +278,41 @@ final class Diagnostics {
 
 		if ( defined( 'SG_CACHEPRESS_VERSION' ) ) {
 			$plugins[] = 'SiteGround Optimizer';
+		}
+
+		return array_values( array_unique( $plugins ) );
+	}
+
+	/**
+	 * Returns detected third-party prefetching plugins that could conflict.
+	 *
+	 * @return array<int, string>
+	 */
+	public function get_active_prefetch_conflict_plugins(): array {
+		$plugins = array();
+
+		if ( class_exists( 'InstantClick' ) || defined( 'INSTANTCLICK_VERSION' ) ) {
+			$plugins[] = 'InstantClick';
+		}
+
+		if ( class_exists( 'Flying_Pages' ) || defined( 'FLYING_PAGES_VERSION' ) ) {
+			$plugins[] = 'Flying Pages';
+		}
+
+		if ( class_exists( 'Quicklink' ) || defined( 'QUICKLINK_VERSION' ) ) {
+			$plugins[] = 'Quicklink';
+		}
+
+		if ( class_exists( 'Instant_Page' ) || defined( 'INSTANT_PAGE_VERSION' ) ) {
+			$plugins[] = 'Instant.page';
+		}
+
+		if ( defined( 'PERFMATTERS_VERSION' ) ) {
+			$plugins[] = 'Perfmatters Instant Page';
+		}
+
+		if ( defined( 'FLYING_SCRIPTS_VERSION' ) ) {
+			$plugins[] = 'Flying Scripts';
 		}
 
 		return array_values( array_unique( $plugins ) );

@@ -98,6 +98,7 @@ final class Plugin {
 		( new RestApi( $this->settings, $this->safety, $diagnostics, $this->measurements ) )->register();
 		( new Admin( $this->settings ) )->register();
 		( new Frontend( $this->settings ) )->register();
+		( new AdminBarDebugger( $this->settings, $this->safety ) )->register();
 		( new SiteHealth( $diagnostics ) )->register();
 		$this->measurements->register();
 

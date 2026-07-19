@@ -436,3 +436,32 @@
 	opacity: 0.55;
 	pointer-events: none;
 }
+
+/* Quick suggestions pills */
+.speculation-pilot__suggestions {
+	align-items: center;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 6px;
+	margin-bottom: 12px;
+	margin-top: 8px;
+}
+
+.speculation-pilot__suggestions-label {
+	color: #646970;
+	font-size: 12px;
+	font-weight: 600;
+}
+
+.speculation-pilot__suggestion-pill {
+	border-radius: 999px !important;
+	font-size: 11px !important;
+	height: auto !important;
+	padding: 2px 10px !important;
+}
+
+.speculation-pilot__suggestion-pill.is-added {
+	background: #edfaef !important;
+	color: #008a20 !important;
+}
+

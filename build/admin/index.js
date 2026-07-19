@@ -631,6 +631,18 @@
 		var maxExclusions = config.limits ? config.limits.freeMaxExclusions : 5;
 		var atLimit = ! isPro && settings.exclusions.length >= maxExclusions;
 
+		var suggestionsState = useState( [] );
+		var suggestions = suggestionsState[ 0 ];
+		var setSuggestions = suggestionsState[ 1 ];
+
+		useEffect( function () {
+			request( 'routes/suggestions' ).then( function ( res ) {
+				if ( res && res.suggestions ) {
+					setSuggestions( res.suggestions );
+				}
+			} ).catch( function () {} );
+		}, [] );
+
 		function addPath() {
 			var path = newPath.trim();
 			if ( ! path || atLimit ) {
@@ -745,6 +757,38 @@
 						__( 'Add path', 'speculation-pilot' )
 					)
 				),
+				suggestions.length
+					? el(
+							'div',
+							{ className: 'speculation-pilot__suggestions' },
+							el( 'span', { className: 'speculation-pilot__suggestions-label' }, __( 'Quick suggestions: ', 'speculation-pilot' ) ),
+							suggestions.map( function ( item ) {
+								var isAdded = settings.exclusions.indexOf( item.path ) !== -1;
+								return el(
+									Button,
+									{
+										key: item.path,
+										variant: 'tertiary',
+										isSmall: true,
+										className: 'speculation-pilot__suggestion-pill' + ( isAdded ? ' is-added' : '' ),
+										disabled: atLimit || isAdded,
+										onClick: function () {
+											if ( isAdded || atLimit ) {
+												return;
+											}
+											props.setSettings(
+												Object.assign( {}, settings, {
+													exclusions: settings.exclusions.concat( [ item.path ] ).filter( unique ),
+													preset: 'custom',
+												} )
+											);
+										},
+									},
+									( isAdded ? '✓ ' : '+ ' ) + item.label + ' (' + item.path + ')'
+								);
+							} )
+					  )
+					: null,
 				! isPro
 					? el(
 							'div',
