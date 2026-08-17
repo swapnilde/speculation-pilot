@@ -37,6 +37,35 @@ function wpcliLive( command ) {
 function setup() {
 	console.log( '🚀 Initializing Speculation Pilot QA Environment...' );
 
+	// Parse port from base URL.
+	const port = new URL( baseUrl ).port || '80';
+
+	// Check for port conflicts before starting containers.
+	try {
+		const allContainers = runCmd(
+			`docker ps --format "{{.Names}}\t{{.Ports}}"`,
+			{ silent: true, ignoreError: true }
+		) || '';
+
+		const conflicting = allContainers
+			.split( '\n' )
+			.filter( ( line ) => line.includes( `:${ port }->` ) )
+			.map( ( line ) => line.split( '\t' )[ 0 ] )
+			.filter( ( name ) => ! name.startsWith( 'speculation-pilot' ) );
+
+		if ( conflicting.length > 0 ) {
+			console.error( `\n❌ Port ${ port } is already in use by: ${ conflicting.join( ', ' ) }` );
+			console.error( `   Stop the conflicting container(s) first:\n` );
+			conflicting.forEach( ( name ) => {
+				console.error( `     docker stop ${ name }` );
+			} );
+			console.error( '' );
+			process.exit( 1 );
+		}
+	} catch ( e ) {
+		// Docker might not be running; let docker compose up handle it.
+	}
+
 	// Ensure Docker containers are running.
 	runCmd( 'docker compose up -d' );
 

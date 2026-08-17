@@ -84,6 +84,10 @@
 	}
 
 	function ProBadge() {
+		if ( config.isPro ) {
+			return null;
+		}
+
 		return el(
 			'a',
 			{
@@ -1447,7 +1451,7 @@
 		return el(
 			'div',
 			{ className: 'speculation-pilot__section' },
-			el( 'h2', null, __( 'Site Audit', 'speculation-pilot' ), ' ', el( ProBadge ) ),
+			el( 'h2', null, __( 'Site Audit', 'speculation-pilot' ), ! config.isPro ? el( Fragment, null, ' ', el( ProBadge ) ) : null ),
 			el( 'p', null, __( 'Run a comprehensive site audit to check your environment, configuration, exclusions, and content volume.', 'speculation-pilot' ) ),
 			el(
 				Button,
@@ -1556,7 +1560,7 @@
 		return el(
 			'div',
 			{ className: 'speculation-pilot__section' },
-			el( 'h2', null, __( 'Email Reports', 'speculation-pilot' ), ' ', el( ProBadge ) ),
+			el( 'h2', null, __( 'Email Reports', 'speculation-pilot' ), ! config.isPro ? el( Fragment, null, ' ', el( ProBadge ) ) : null ),
 			emailNotice
 				? el( Notice, { status: emailNotice.status, isDismissible: true, onRemove: function () { setEmailNotice( null ); } }, emailNotice.message )
 				: null,

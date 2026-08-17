@@ -1,6 +1,16 @@
 const { test, expect } = require( '@playwright/test' );
+const { execSync } = require( 'child_process' );
 
 test.describe( 'Speculation Pilot frontend', () => {
+	test.beforeAll( () => {
+		try {
+			execSync( 'docker compose exec -T wpcli wp option patch insert speculation_pilot_settings measurement_enabled true --allow-root', { encoding: 'utf8' } );
+			execSync( 'docker compose exec -T wpcli wp option patch insert speculation_pilot_settings enabled true --allow-root', { encoding: 'utf8' } );
+		} catch ( e ) {
+			// fallback
+		}
+	} );
+
 	test( 'prints speculation rules and measurement script for logged-out visitors', async ( { page } ) => {
 		await page.goto( '/' );
 
