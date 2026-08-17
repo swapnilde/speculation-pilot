@@ -51,4 +51,3 @@ final class SettingsTest extends WP_UnitTestCase {
 		$this->assertSame( 365, $clean['retention_days'] );
 	}
 }
-

@@ -32,8 +32,8 @@ final class SafetyEngineTest extends WP_UnitTestCase {
 	}
 
 	public function test_returns_default_selector_exclusions(): void {
-		$settings = new Settings();
-		$engine   = new SafetyEngine( $settings );
+		$settings  = new Settings();
+		$engine    = new SafetyEngine( $settings );
 		$selectors = $engine->get_exclusion_selectors();
 
 		$this->assertContains( 'a[rel~="nofollow"]', $selectors );
@@ -41,4 +41,3 @@ final class SafetyEngineTest extends WP_UnitTestCase {
 		$this->assertContains( '.no-speculate', $selectors );
 	}
 }
-

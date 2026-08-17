@@ -13,9 +13,9 @@ namespace SpeculationPilot;
  * Reads, sanitizes, and persists plugin settings.
  */
 final class Settings {
-	public const MODES = array( 'core_default', 'disabled', 'prefetch', 'prerender' );
+	public const MODES     = array( 'core_default', 'disabled', 'prefetch', 'prerender' );
 	public const EAGERNESS = array( 'core_default', 'conservative', 'moderate', 'eager' );
-	public const PRESETS = array( 'safe', 'balanced', 'aggressive_lab', 'custom' );
+	public const PRESETS   = array( 'safe', 'balanced', 'aggressive_lab', 'custom' );
 
 	/**
 	 * Returns default settings.
@@ -78,9 +78,9 @@ final class Settings {
 	 * @return array<string, mixed>
 	 */
 	public function sanitize( array $input ): array {
-		$defaults = self::defaults();
-		$settings = array_replace_recursive( $defaults, $input );
-		$mode     = isset( $settings['mode'] ) ? sanitize_key( (string) $settings['mode'] ) : $defaults['mode'];
+		$defaults  = self::defaults();
+		$settings  = array_replace_recursive( $defaults, $input );
+		$mode      = isset( $settings['mode'] ) ? sanitize_key( (string) $settings['mode'] ) : $defaults['mode'];
 		$eagerness = isset( $settings['eagerness'] ) ? sanitize_key( (string) $settings['eagerness'] ) : $defaults['eagerness'];
 		$preset    = isset( $settings['preset'] ) ? sanitize_key( (string) $settings['preset'] ) : $defaults['preset'];
 
@@ -96,7 +96,7 @@ final class Settings {
 			$preset = $defaults['preset'];
 		}
 
-		$integrations = is_array( $settings['integrations'] ) ? $settings['integrations'] : array();
+		$integrations       = is_array( $settings['integrations'] ) ? $settings['integrations'] : array();
 		$clean_integrations = array();
 		foreach ( $defaults['integrations'] as $key => $default_value ) {
 			$clean_integrations[ $key ] = isset( $integrations[ $key ] )

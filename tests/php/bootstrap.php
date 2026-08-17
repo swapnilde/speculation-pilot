@@ -28,4 +28,3 @@ tests_add_filter(
 );
 
 require $_tests_dir . '/includes/bootstrap.php';
-

@@ -33,14 +33,14 @@ define( 'SPECULATION_PILOT_FREE_MAX_EXCLUSIONS', 5 );
 define( 'SPECULATION_PILOT_FREE_MAX_TOP_PATHS', 3 );
 
 spl_autoload_register(
-	static function ( string $class ): void {
+	static function ( string $class_name ): void {
 		$prefix = 'SpeculationPilot\\';
 
-		if ( 0 !== strpos( $class, $prefix ) ) {
+		if ( 0 !== strpos( $class_name, $prefix ) ) {
 			return;
 		}
 
-		$relative = substr( $class, strlen( $prefix ) );
+		$relative = substr( $class_name, strlen( $prefix ) );
 		$relative = str_replace( '\\', '/', $relative );
 		$file     = SPECULATION_PILOT_PATH . 'includes/' . $relative . '.php';
 
@@ -59,4 +59,3 @@ add_action(
 		SpeculationPilot\Plugin::instance()->boot();
 	}
 );
-

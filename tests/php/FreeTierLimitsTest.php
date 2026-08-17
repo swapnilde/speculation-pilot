@@ -86,13 +86,13 @@ final class FreeTierLimitsTest extends WP_UnitTestCase {
 	}
 
 	public function test_exclusions_are_clamped_to_free_limit(): void {
-		$paths = array( '/a', '/b', '/c', '/d', '/e', '/f', '/g', '/h', '/i', '/j' );
+		$paths  = array( '/a', '/b', '/c', '/d', '/e', '/f', '/g', '/h', '/i', '/j' );
 		$result = Settings::get_effective_exclusions( $paths );
 		$this->assertCount( SPECULATION_PILOT_FREE_MAX_EXCLUSIONS, $result );
 	}
 
 	public function test_exclusions_below_free_limit_are_preserved(): void {
-		$paths = array( '/a', '/b' );
+		$paths  = array( '/a', '/b' );
 		$result = Settings::get_effective_exclusions( $paths );
 		$this->assertCount( 2, $result );
 	}
@@ -131,9 +131,9 @@ final class FreeTierLimitsTest extends WP_UnitTestCase {
 	// ─── Measurements Report ─────────────────────────────────────────
 
 	public function test_report_limits_top_paths_on_free(): void {
-		$settings = new Settings();
+		$settings     = new Settings();
 		$measurements = new Measurements( $settings );
-		$report = $measurements->get_report();
+		$report       = $measurements->get_report();
 
 		// Verify the topPaths array respects the free limit (may be empty — that's fine).
 		if ( ! empty( $report['topPaths'] ) ) {
@@ -166,9 +166,12 @@ final class FreeTierLimitsTest extends WP_UnitTestCase {
 	// ─── Pro Filter Override ─────────────────────────────────────────
 
 	public function test_pro_filter_unlocks_retention(): void {
-		add_filter( 'speculation_pilot_max_retention_days', static function (): int {
-			return 365;
-		} );
+		add_filter(
+			'speculation_pilot_max_retention_days',
+			static function (): int {
+				return 365;
+			}
+		);
 
 		$this->assertSame( 365, Settings::get_effective_retention_days_cap() );
 		$this->assertSame( 365, Settings::get_effective_retention_days( 365 ) );
@@ -177,9 +180,12 @@ final class FreeTierLimitsTest extends WP_UnitTestCase {
 	}
 
 	public function test_pro_filter_unlocks_exclusions(): void {
-		add_filter( 'speculation_pilot_max_exclusions', static function (): int {
-			return PHP_INT_MAX;
-		} );
+		add_filter(
+			'speculation_pilot_max_exclusions',
+			static function (): int {
+				return PHP_INT_MAX;
+			}
+		);
 
 		$paths = array();
 		for ( $i = 0; $i < 20; $i++ ) {

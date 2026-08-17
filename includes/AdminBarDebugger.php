@@ -103,7 +103,7 @@ final class AdminBarDebugger {
 		);
 
 		// Route Exclusion check node.
-		$current_path = isset( $_SERVER['REQUEST_URI'] ) ? Measurements::sanitize_path( wp_unslash( (string) $_SERVER['REQUEST_URI'] ) ) : '/';
+		$current_path = isset( $_SERVER['REQUEST_URI'] ) ? Measurements::sanitize_path( sanitize_text_field( wp_unslash( (string) $_SERVER['REQUEST_URI'] ) ) ) : '/';
 		$exclusions   = $this->safety->get_exclusion_paths( 'prefetch' );
 		$is_excluded  = false;
 		$matched_rule = '';

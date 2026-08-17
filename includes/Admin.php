@@ -99,7 +99,7 @@ final class Admin {
 					'freeMaxExclusions' => SPECULATION_PILOT_FREE_MAX_EXCLUSIONS,
 					'freeMaxTopPaths'   => SPECULATION_PILOT_FREE_MAX_TOP_PATHS,
 				),
-				'constants' => array(
+				'constants'       => array(
 					'modes'      => Settings::MODES,
 					'eagerness'  => Settings::EAGERNESS,
 					'presets'    => Settings::PRESETS,
@@ -148,4 +148,3 @@ final class Admin {
 		return $links;
 	}
 }
-

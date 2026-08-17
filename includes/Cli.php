@@ -223,4 +223,3 @@ final class Cli {
 		return null === $value ? 'n/a' : (string) round( (float) $value ) . ' ms';
 	}
 }
-

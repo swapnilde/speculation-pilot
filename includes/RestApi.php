@@ -16,9 +16,9 @@ use WP_REST_Response;
  * Registers REST routes.
  */
 final class RestApi {
-	private const NAMESPACE = 'speculation-pilot/v1';
+	private const NAMESPACE                  = 'speculation-pilot/v1';
 	private const MAX_MEASUREMENT_BODY_BYTES = 4096;
-	private const MEASUREMENT_KEYS = array(
+	private const MEASUREMENT_KEYS           = array(
 		'currentPath',
 		'previousPath',
 		'navigationType',

@@ -217,19 +217,19 @@ final class Diagnostics {
 	 */
 	private function get_integrations(): array {
 		return array(
-			'woocommerce' => array(
+			'woocommerce'  => array(
 				'label'  => 'WooCommerce',
 				'active' => class_exists( 'WooCommerce' ),
 			),
-			'edd'         => array(
+			'edd'          => array(
 				'label'  => 'Easy Digital Downloads',
 				'active' => class_exists( 'Easy_Digital_Downloads' ),
 			),
-			'membership'  => array(
+			'membership'   => array(
 				'label'  => __( 'Membership plugins', 'speculation-pilot' ),
 				'active' => class_exists( 'MemberPress' ) || defined( 'PMPRO_VERSION' ) || defined( 'PAID_MEMBERSHIPS_PRO_VERSION' ),
 			),
-			'lms'         => array(
+			'lms'          => array(
 				'label'  => __( 'LMS plugins', 'speculation-pilot' ),
 				'active' => defined( 'LEARNDASH_VERSION' ) || defined( 'TUTOR_VERSION' ) || class_exists( 'LifterLMS' ),
 			),
@@ -237,7 +237,7 @@ final class Diagnostics {
 				'label'  => __( 'Multilingual plugins', 'speculation-pilot' ),
 				'active' => defined( 'ICL_SITEPRESS_VERSION' ) || defined( 'POLYLANG_VERSION' ) || defined( 'TRP_PLUGIN_VERSION' ),
 			),
-			'cache'       => array(
+			'cache'        => array(
 				'label'  => __( 'Cache and optimization plugins', 'speculation-pilot' ),
 				'active' => ! empty( $this->get_active_cache_plugins() ),
 			),

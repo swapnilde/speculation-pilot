@@ -123,8 +123,39 @@ sp_icon( 128, $dir . '/icon-128x128.png' );
 sp_icon( 256, $dir . '/icon-256x256.png' );
 sp_banner( 772, 250, $dir . '/banner-772x250.png' );
 sp_banner( 1544, 500, $dir . '/banner-1544x500.png' );
-sp_screenshot( 'Overview', 'Mode, diagnostics, active exclusions, and local timing at a glance.', $dir . '/screenshot-1.png', array( '/blog/*' => 78, '/shop/*' => 54, '/docs/*' => 42, '/pricing/*' => 68 ) );
-sp_screenshot( 'Rules and exclusions', 'Production-safe presets for WooCommerce, memberships, LMS, cache, and multilingual sites.', $dir . '/screenshot-2.png', array( 'WooCommerce' => 88, 'Membership' => 56, 'LMS' => 44, 'Cache bypass' => 62 ) );
-sp_screenshot( 'Measurements', 'Privacy-safe p75 trends, mode breakdowns, and path group reporting.', $dir . '/screenshot-3.png', array( 'Mon' => 72, 'Tue' => 61, 'Wed' => 53, 'Thu' => 46, 'Fri' => 41 ) );
+sp_screenshot(
+	'Overview',
+	'Mode, diagnostics, active exclusions, and local timing at a glance.',
+	$dir . '/screenshot-1.png',
+	array(
+		'/blog/*'    => 78,
+		'/shop/*'    => 54,
+		'/docs/*'    => 42,
+		'/pricing/*' => 68,
+	)
+);
+sp_screenshot(
+	'Rules and exclusions',
+	'Production-safe presets for WooCommerce, memberships, LMS, cache, and multilingual sites.',
+	$dir . '/screenshot-2.png',
+	array(
+		'WooCommerce'  => 88,
+		'Membership'   => 56,
+		'LMS'          => 44,
+		'Cache bypass' => 62,
+	)
+);
+sp_screenshot(
+	'Measurements',
+	'Privacy-safe p75 trends, mode breakdowns, and path group reporting.',
+	$dir . '/screenshot-3.png',
+	array(
+		'Mon' => 72,
+		'Tue' => 61,
+		'Wed' => 53,
+		'Thu' => 46,
+		'Fri' => 41,
+	)
+);
 
 echo "Generated Speculation Pilot assets.\n";

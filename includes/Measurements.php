@@ -121,6 +121,7 @@ final class Measurements {
 			);
 		}
 
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery
 		$inserted = $wpdb->insert(
 			self::table_name(),
 			array(
@@ -172,13 +173,16 @@ final class Measurements {
 			return $this->empty_report( $settings );
 		}
 
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 		$rows = $wpdb->get_results(
 			$wpdb->prepare(
+				// phpcs:disable WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 				"SELECT current_path, duration, ttfb, load_complete, was_prerender, mode, eagerness, created_at
 				FROM {$table}
 				WHERE created_at >= %s
 				ORDER BY created_at DESC
 				LIMIT 5000",
+				// phpcs:enable WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 				$since
 			),
 			ARRAY_A
@@ -204,8 +208,8 @@ final class Measurements {
 				$ttfbs[] = (float) $row['ttfb'];
 			}
 
-			$path = (string) $row['current_path'];
-			$date = substr( (string) $row['created_at'], 0, 10 );
+			$path        = (string) $row['current_path'];
+			$date        = substr( (string) $row['created_at'], 0, 10 );
 			$group_label = self::path_group( $path );
 			$mode_key    = trim( (string) $row['mode'] . ' / ' . (string) $row['eagerness'], ' /' );
 
@@ -394,8 +398,10 @@ final class Measurements {
 			return 0;
 		}
 
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared
 		$count = (int) $wpdb->get_var( 'SELECT COUNT(*) FROM ' . self::table_name() );
 
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared
 		$wpdb->query( 'TRUNCATE TABLE ' . self::table_name() );
 
 		return $count;
@@ -415,8 +421,10 @@ final class Measurements {
 			return;
 		}
 
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 		$wpdb->query(
 			$wpdb->prepare(
+				// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
 				'DELETE FROM ' . self::table_name() . ' WHERE created_at < %s',
 				$before
 			)
@@ -475,7 +483,7 @@ final class Measurements {
 				return '';
 			}
 
-			$path   = isset( $parsed['path'] ) ? (string) $parsed['path'] : '';
+			$path = isset( $parsed['path'] ) ? (string) $parsed['path'] : '';
 		}
 
 		$path = strtok( $path, '?#' );
@@ -503,6 +511,7 @@ final class Measurements {
 
 		$table_name = self::table_name();
 
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 		return $table_name === $wpdb->get_var(
 			$wpdb->prepare( 'SHOW TABLES LIKE %s', $table_name )
 		);
@@ -617,7 +626,7 @@ final class Measurements {
 	 * Returns percentile for a number set.
 	 *
 	 * @param array<int, float> $values Values.
-	 * @param int              $percentile Percentile.
+	 * @param int               $percentile Percentile.
 	 * @return float|null
 	 */
 	public static function percentile( array $values, int $percentile ) {

@@ -119,6 +119,7 @@ final class CoreIntegration {
 	 * @return array<int, string>
 	 */
 	public function filter_exclude_selectors( array $selectors, string $mode ): array {
+		unset( $mode );
 		$settings = $this->settings->get();
 
 		if ( empty( $settings['enabled'] ) || 'disabled' === $settings['mode'] ) {
@@ -135,4 +136,3 @@ final class CoreIntegration {
 		);
 	}
 }
-
