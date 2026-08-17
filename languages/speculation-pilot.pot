@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-08-17T12:15:40+00:00\n"
+"POT-Creation-Date: 2026-08-17T12:56:03+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: speculation-pilot\n"
@@ -20,7 +20,7 @@ msgstr ""
 #: speculation-pilot.php:7
 #: includes/Admin.php:46
 #: includes/Admin.php:47
-#: src/admin/index.js:365
+#: src/admin/index.js:475
 msgid "Speculation Pilot"
 msgstr ""
 
@@ -37,8 +37,8 @@ msgid "Safely configure, diagnose, and measure WordPress speculative loading."
 msgstr ""
 
 #: includes/Admin.php:143
-#: src/admin/index.js:32
-#: src/admin/index.js:1246
+#: src/admin/index.js:34
+#: src/admin/index.js:1893
 msgid "Settings"
 msgstr ""
 
@@ -107,7 +107,7 @@ msgid "PHP %1$s or newer is required. Current version: %2$s."
 msgstr ""
 
 #: includes/Diagnostics.php:84
-#: src/admin/index.js:514
+#: src/admin/index.js:650
 msgid "Plan"
 msgstr ""
 
@@ -200,22 +200,22 @@ msgid "Prerender can run page JavaScript before navigation is completed. Keep ca
 msgstr ""
 
 #: includes/Diagnostics.php:229
-#: src/admin/index.js:706
+#: src/admin/index.js:964
 msgid "Membership plugins"
 msgstr ""
 
 #: includes/Diagnostics.php:233
-#: src/admin/index.js:714
+#: src/admin/index.js:983
 msgid "LMS plugins"
 msgstr ""
 
 #: includes/Diagnostics.php:237
-#: src/admin/index.js:722
+#: src/admin/index.js:999
 msgid "Multilingual plugins"
 msgstr ""
 
 #: includes/Diagnostics.php:241
-#: src/admin/index.js:730
+#: src/admin/index.js:1021
 msgid "Cache and optimization plugins"
 msgstr ""
 
@@ -330,560 +330,560 @@ msgstr ""
 msgid "Speculation Pilot is ready"
 msgstr ""
 
-#: src/admin/index.js:27
+#: src/admin/index.js:26
 msgid "Overview"
 msgstr ""
 
-#: src/admin/index.js:28
-#: src/admin/index.js:558
+#: src/admin/index.js:27
+#: src/admin/index.js:740
 msgid "Rules"
 msgstr ""
 
-#: src/admin/index.js:29
+#: src/admin/index.js:28
 msgid "Exclusions"
 msgstr ""
 
-#: src/admin/index.js:30
-#: src/admin/index.js:509
-#: src/admin/index.js:866
+#: src/admin/index.js:31
+#: src/admin/index.js:637
+#: src/admin/index.js:1249
 msgid "Measurements"
 msgstr ""
 
-#: src/admin/index.js:31
-#: src/admin/index.js:504
-#: src/admin/index.js:1097
+#: src/admin/index.js:33
+#: src/admin/index.js:629
+#: src/admin/index.js:1674
 msgid "Diagnostics"
 msgstr ""
 
-#: src/admin/index.js:37
+#: src/admin/index.js:39
 msgid "Safe Boost"
 msgstr ""
 
-#: src/admin/index.js:38
+#: src/admin/index.js:40
 msgid "Conservative prefetch with the broadest safety exclusions. Best first setting for production sites."
 msgstr ""
 
-#: src/admin/index.js:43
+#: src/admin/index.js:48
 msgid "Balanced"
 msgstr ""
 
-#: src/admin/index.js:44
+#: src/admin/index.js:49
 msgid "Moderate prefetch with standard commerce and account safeguards. Good for content-heavy sites."
 msgstr ""
 
-#: src/admin/index.js:49
+#: src/admin/index.js:57
 msgid "Aggressive Lab"
 msgstr ""
 
-#: src/admin/index.js:50
+#: src/admin/index.js:58
 msgid "Prerender with warnings and guarded exclusions. Use for controlled testing before broad rollout."
 msgstr ""
 
-#: src/admin/index.js:98
+#: src/admin/index.js:129
 msgid "Requires Speculation Pilot Pro"
 msgstr ""
 
-#: src/admin/index.js:117
+#: src/admin/index.js:159
 msgid "Unlock with Speculation Pilot Pro"
 msgstr ""
 
-#: src/admin/index.js:125
+#: src/admin/index.js:173
 msgid "Upgrade →"
 msgstr ""
 
-#: src/admin/index.js:143
+#: src/admin/index.js:195
 msgid "Unlock WooCommerce presets, 365-day history, advanced reports, and more with Pro."
 msgstr ""
 
-#: src/admin/index.js:154
+#: src/admin/index.js:212
 msgid "See Pro →"
 msgstr ""
 
-#: src/admin/index.js:239
+#: src/admin/index.js:300
 msgid "Unable to load Speculation Pilot data."
 msgstr ""
 
-#: src/admin/index.js:307
+#: src/admin/index.js:381
 msgid "Settings saved."
 msgstr ""
 
-#: src/admin/index.js:313
+#: src/admin/index.js:390
 msgid "Unable to save settings."
 msgstr ""
 
-#: src/admin/index.js:322
+#: src/admin/index.js:404
 msgid "Clear all local Speculation Pilot measurement rows?"
 msgstr ""
 
-#: src/admin/index.js:338
+#: src/admin/index.js:426
 msgid "Local measurements cleared."
 msgstr ""
 
-#: src/admin/index.js:344
+#: src/admin/index.js:438
 msgid "Unable to clear measurements."
 msgstr ""
 
-#: src/admin/index.js:364
+#: src/admin/index.js:467
 msgid "WordPress speculative loading control"
 msgstr ""
 
-#: src/admin/index.js:369
+#: src/admin/index.js:480
 msgid "Safely tune prefetch and prerender behavior, protect risky WordPress routes, and measure local navigation timing without sending data to a SaaS."
 msgstr ""
 
-#: src/admin/index.js:382
+#: src/admin/index.js:496
 msgid "Refresh"
 msgstr ""
 
-#: src/admin/index.js:392
+#: src/admin/index.js:506
 msgid "Save settings"
 msgstr ""
 
-#: src/admin/index.js:415
-msgid "Loading plugin data..."
-msgstr ""
-
-#: src/admin/index.js:499
-msgid "Current mode"
-msgstr ""
-
-#: src/admin/index.js:500
-#: src/admin/index.js:604
-msgid "Disabled"
-msgstr ""
-
-#: src/admin/index.js:501
-msgid "Core rules are not being modified."
-msgstr ""
-
-#: src/admin/index.js:506
-msgid "Open Diagnostics for detailed compatibility notes."
-msgstr ""
-
-#: src/admin/index.js:511
-msgid "Local samples retained on this site."
-msgstr ""
-
-#: src/admin/index.js:511
-msgid "Measurement is currently off."
-msgstr ""
-
-#: src/admin/index.js:515
-msgid "Pro ✓"
-msgstr ""
-
-#: src/admin/index.js:515
-msgid "Free"
-msgstr ""
-
-#: src/admin/index.js:516
-msgid "All features unlocked."
-msgstr ""
-
-#: src/admin/index.js:516
-msgid "Upgrade for advanced reports."
-msgstr ""
-
-#: src/admin/index.js:525
-msgid "Active exclusions"
-msgstr ""
-
-#: src/admin/index.js:538
-msgid "No active exclusions yet."
-msgstr ""
-
-#: src/admin/index.js:543
-msgid "Timing snapshot"
-msgstr ""
-
-#: src/admin/index.js:544
-#: src/admin/index.js:928
-msgid "p50 duration"
-msgstr ""
-
-#: src/admin/index.js:545
-#: src/admin/index.js:929
-#: src/admin/index.js:990
-#: src/admin/index.js:1028
-msgid "p75 duration"
-msgstr ""
-
-#: src/admin/index.js:546
-#: src/admin/index.js:930
-msgid "p75 TTFB"
-msgstr ""
-
-#: src/admin/index.js:586
-msgid "Prerender can execute JavaScript before the visitor commits to a navigation. Keep checkout, cart, account, and action URLs excluded."
-msgstr ""
-
-#: src/admin/index.js:593
-msgid "Enable Speculation Pilot"
-msgstr ""
-
-#: src/admin/index.js:600
-msgid "Mode"
-msgstr ""
-
-#: src/admin/index.js:603
-#: src/admin/index.js:616
-msgid "Core default"
-msgstr ""
-
-#: src/admin/index.js:605
-msgid "Prefetch"
-msgstr ""
-
-#: src/admin/index.js:606
-msgid "Prerender"
-msgstr ""
-
-#: src/admin/index.js:613
-msgid "Eagerness"
+#: src/admin/index.js:529
+msgid "Loading plugin data…"
 msgstr ""
 
 #: src/admin/index.js:617
-msgid "Conservative"
+msgid "Current mode"
 msgstr ""
 
-#: src/admin/index.js:618
-msgid "Moderate"
+#: src/admin/index.js:620
+#: src/admin/index.js:798
+msgid "Disabled"
 msgstr ""
 
-#: src/admin/index.js:619
-msgid "Eager"
+#: src/admin/index.js:623
+msgid "Core rules are not being modified."
 msgstr ""
 
-#: src/admin/index.js:684
-msgid "Integration presets"
+#: src/admin/index.js:631
+msgid "Open Diagnostics for detailed compatibility notes."
 msgstr ""
 
-#: src/admin/index.js:685
-msgid "Integration presets require Speculation Pilot Pro."
+#: src/admin/index.js:640
+msgid "Local samples retained on this site."
 msgstr ""
 
-#: src/admin/index.js:742
-msgid "Manual exclusions"
+#: src/admin/index.js:644
+msgid "Measurement is currently off."
 msgstr ""
 
-#: src/admin/index.js:747
-msgid "Path pattern"
+#: src/admin/index.js:652
+msgid "Pro ✓"
 msgstr ""
 
-#: src/admin/index.js:761
-msgid "Add path"
+#: src/admin/index.js:653
+msgid "Free"
 msgstr ""
 
-#: src/admin/index.js:768
-msgid "Quick suggestions: "
+#: src/admin/index.js:655
+msgid "All features unlocked."
+msgstr ""
+
+#: src/admin/index.js:656
+msgid "Upgrade for advanced reports."
+msgstr ""
+
+#: src/admin/index.js:671
+msgid "Active exclusions"
+msgstr ""
+
+#: src/admin/index.js:697
+msgid "No active exclusions yet."
+msgstr ""
+
+#: src/admin/index.js:709
+msgid "Timing snapshot"
+msgstr ""
+
+#: src/admin/index.js:714
+#: src/admin/index.js:1338
+msgid "p50 duration"
+msgstr ""
+
+#: src/admin/index.js:720
+#: src/admin/index.js:1342
+#: src/admin/index.js:1466
+#: src/admin/index.js:1548
+msgid "p75 duration"
+msgstr ""
+
+#: src/admin/index.js:726
+#: src/admin/index.js:1346
+msgid "p75 TTFB"
+msgstr ""
+
+#: src/admin/index.js:770
+msgid "Prerender can execute JavaScript before the visitor commits to a navigation. Keep checkout, cart, account, and action URLs excluded."
+msgstr ""
+
+#: src/admin/index.js:780
+msgid "Enable Speculation Pilot"
+msgstr ""
+
+#: src/admin/index.js:790
+msgid "Mode"
+msgstr ""
+
+#: src/admin/index.js:794
+#: src/admin/index.js:819
+msgid "Core default"
 msgstr ""
 
 #: src/admin/index.js:802
-msgid "manual exclusions used."
+msgid "Prefetch"
 msgstr ""
 
-#: src/admin/index.js:803
-msgid "Unlimited with Pro."
+#: src/admin/index.js:806
+msgid "Prerender"
 msgstr ""
 
-#: src/admin/index.js:824
-msgid "Remove"
+#: src/admin/index.js:815
+msgid "Eagerness"
 msgstr ""
 
-#: src/admin/index.js:829
-msgid "No manual exclusions have been added."
+#: src/admin/index.js:823
+msgid "Conservative"
 msgstr ""
 
-#: src/admin/index.js:834
-msgid "Effective exclusion preview"
+#: src/admin/index.js:827
+msgid "Moderate"
 msgstr ""
 
-#: src/admin/index.js:847
-msgid "Save settings to refresh the preview."
-msgstr ""
-
-#: src/admin/index.js:868
-msgid "Enable privacy-safe local measurement"
-msgstr ""
-
-#: src/admin/index.js:875
-msgid "Retention days"
-msgstr ""
-
-#: src/admin/index.js:875
-msgid "up to 365 with Pro"
-msgstr ""
-
-#: src/admin/index.js:896
-msgid "Export CSV"
+#: src/admin/index.js:831
+msgid "Eager"
 msgstr ""
 
 #: src/admin/index.js:908
+msgid "Integration presets"
+msgstr ""
+
+#: src/admin/index.js:915
+msgid "Integration presets require Speculation Pilot Pro."
+msgstr ""
+
+#: src/admin/index.js:1040
+msgid "Manual exclusions"
+msgstr ""
+
+#: src/admin/index.js:1046
+msgid "Path pattern"
+msgstr ""
+
+#: src/admin/index.js:1060
+msgid "Add path"
+msgstr ""
+
+#: src/admin/index.js:1073
+msgid "Quick suggestions:"
+msgstr ""
+
+#: src/admin/index.js:1130
+msgid "manual exclusions used."
+msgstr ""
+
+#: src/admin/index.js:1139
+msgid "Unlimited with Pro."
+msgstr ""
+
+#: src/admin/index.js:1174
+msgid "Remove"
+msgstr ""
+
+#: src/admin/index.js:1182
+msgid "No manual exclusions have been added."
+msgstr ""
+
+#: src/admin/index.js:1194
+msgid "Effective exclusion preview"
+msgstr ""
+
+#: src/admin/index.js:1218
+msgid "Save settings to refresh the preview."
+msgstr ""
+
+#: src/admin/index.js:1251
+msgid "Enable privacy-safe local measurement"
+msgstr ""
+
+#: src/admin/index.js:1262
+msgid "Retention days"
+msgstr ""
+
+#: src/admin/index.js:1265
+msgid "up to 365 with Pro"
+msgstr ""
+
+#: src/admin/index.js:1294
+msgid "Export CSV"
+msgstr ""
+
+#: src/admin/index.js:1306
 msgid "Download PDF"
 msgstr ""
 
-#: src/admin/index.js:919
+#: src/admin/index.js:1317
 msgid "Clear measurements"
 msgstr ""
 
-#: src/admin/index.js:922
+#: src/admin/index.js:1324
 msgid "Only local paths and timing numbers are stored."
 msgstr ""
 
-#: src/admin/index.js:927
-#: src/admin/index.js:989
-#: src/admin/index.js:1027
+#: src/admin/index.js:1334
+#: src/admin/index.js:1461
+#: src/admin/index.js:1543
 msgid "Samples"
 msgstr ""
 
-#: src/admin/index.js:931
+#: src/admin/index.js:1350
 msgid "Prerender hits"
 msgstr ""
 
-#: src/admin/index.js:932
+#: src/admin/index.js:1354
 msgid "Retention"
 msgstr ""
 
-#: src/admin/index.js:940
+#: src/admin/index.js:1369
 msgid "Daily p75 duration"
 msgstr ""
 
-#: src/admin/index.js:950
+#: src/admin/index.js:1386
 msgid "No daily trend yet."
 msgstr ""
 
-#: src/admin/index.js:956
+#: src/admin/index.js:1399
 msgid "Mode breakdown"
 msgstr ""
 
-#: src/admin/index.js:965
+#: src/admin/index.js:1415
 msgid "samples"
 msgstr ""
 
-#: src/admin/index.js:969
+#: src/admin/index.js:1423
 msgid "No mode data yet."
 msgstr ""
 
-#: src/admin/index.js:976
+#: src/admin/index.js:1437
 msgid "Path groups"
 msgstr ""
 
-#: src/admin/index.js:988
+#: src/admin/index.js:1456
 msgid "Group"
 msgstr ""
 
-#: src/admin/index.js:991
-#: src/admin/index.js:1029
+#: src/admin/index.js:1474
+#: src/admin/index.js:1556
 msgid "Prerenders"
 msgstr ""
 
-#: src/admin/index.js:1009
+#: src/admin/index.js:1514
 msgid "No grouped path data yet."
 msgstr ""
 
-#: src/admin/index.js:1015
+#: src/admin/index.js:1524
 msgid "Top paths"
 msgstr ""
 
-#: src/admin/index.js:1026
+#: src/admin/index.js:1538
 msgid "Path"
 msgstr ""
 
-#: src/admin/index.js:1047
+#: src/admin/index.js:1593
 msgid "No measurements yet."
 msgstr ""
 
-#: src/admin/index.js:1098
+#: src/admin/index.js:1678
 msgid "Overall status"
 msgstr ""
 
-#: src/admin/index.js:1120
+#: src/admin/index.js:1706
 msgid "Link opt-out selectors"
 msgstr ""
 
-#: src/admin/index.js:1133
+#: src/admin/index.js:1730
 msgid "No selector preview is available."
 msgstr ""
 
-#: src/admin/index.js:1181
+#: src/admin/index.js:1790
 msgid "Activation failed."
 msgstr ""
 
-#: src/admin/index.js:1190
+#: src/admin/index.js:1804
 msgid "Deactivate and remove the license key from this site?"
 msgstr ""
 
-#: src/admin/index.js:1208
+#: src/admin/index.js:1831
 msgid "Deactivation failed."
 msgstr ""
 
-#: src/admin/index.js:1230
+#: src/admin/index.js:1859
 msgid "Check failed."
 msgstr ""
 
-#: src/admin/index.js:1248
-msgid "Delete plugin data on uninstall"
-msgstr ""
-
-#: src/admin/index.js:1255
-msgid "I understand prerender safety tradeoffs"
-msgstr ""
-
-#: src/admin/index.js:1266
-msgid "License"
-msgstr ""
-
-#: src/admin/index.js:1288
-msgid "Pro license is active. All features are unlocked."
-msgstr ""
-
-#: src/admin/index.js:1293
-msgid "License key:"
-msgstr ""
-
-#: src/admin/index.js:1295
-#: src/admin/index.js:1297
+#: src/admin/index.js:1873
+#: src/admin/index.js:1881
 msgid "Expires:"
 msgstr ""
 
-#: src/admin/index.js:1297
+#: src/admin/index.js:1875
 msgid "Lifetime"
 msgstr ""
 
-#: src/admin/index.js:1300
+#: src/admin/index.js:1895
+msgid "Delete plugin data on uninstall"
+msgstr ""
+
+#: src/admin/index.js:1905
+msgid "I understand prerender safety tradeoffs"
+msgstr ""
+
+#: src/admin/index.js:1921
+msgid "License"
+msgstr ""
+
+#: src/admin/index.js:1947
+msgid "Pro license is active. All features are unlocked."
+msgstr ""
+
+#: src/admin/index.js:1962
+msgid "License key:"
+msgstr ""
+
+#: src/admin/index.js:1981
 msgid "Customer:"
 msgstr ""
 
-#: src/admin/index.js:1313
-#: src/admin/index.js:1348
+#: src/admin/index.js:2006
+#: src/admin/index.js:2083
 msgid "Re-check"
 msgstr ""
 
-#: src/admin/index.js:1323
+#: src/admin/index.js:2022
 msgid "Deactivate"
 msgstr ""
 
-#: src/admin/index.js:1336
+#: src/admin/index.js:2045
 msgid "License key is present but not valid."
 msgstr ""
 
-#: src/admin/index.js:1336
+#: src/admin/index.js:2059
 msgid "Status:"
 msgstr ""
 
-#: src/admin/index.js:1358
+#: src/admin/index.js:2099
 msgid "Remove key"
 msgstr ""
 
-#: src/admin/index.js:1363
+#: src/admin/index.js:2110
 msgid "Enter your license key to unlock all Pro features."
 msgstr ""
 
-#: src/admin/index.js:1368
+#: src/admin/index.js:2122
 msgid "License key"
 msgstr ""
 
-#: src/admin/index.js:1383
+#: src/admin/index.js:2143
 msgid "Activate"
 msgstr ""
 
-#: src/admin/index.js:1391
+#: src/admin/index.js:2157
 msgid "You are using the free version of Speculation Pilot."
 msgstr ""
 
-#: src/admin/index.js:1392
+#: src/admin/index.js:2165
 msgid "Upgrade to Pro for WooCommerce presets, 365-day history, advanced reports, PDF exports, and more."
 msgstr ""
 
-#: src/admin/index.js:1400
+#: src/admin/index.js:2179
 msgid "Get Speculation Pilot Pro →"
 msgstr ""
 
-#: src/admin/index.js:1418
-#: src/admin/index.js:1422
+#: src/admin/index.js:2204
+#: src/admin/index.js:2213
 msgid "PDF generation failed."
 msgstr ""
 
-#: src/admin/index.js:1454
+#: src/admin/index.js:2254
 msgid "Site Audit"
 msgstr ""
 
-#: src/admin/index.js:1455
+#: src/admin/index.js:2262
 msgid "Run a comprehensive site audit to check your environment, configuration, exclusions, and content volume."
 msgstr ""
 
-#: src/admin/index.js:1464
-msgid "Running audit..."
+#: src/admin/index.js:2276
+msgid "Running audit…"
 msgstr ""
 
-#: src/admin/index.js:1464
+#: src/admin/index.js:2277
 msgid "Run site audit"
 msgstr ""
 
-#: src/admin/index.js:1471
+#: src/admin/index.js:2286
 msgid "Overall:"
 msgstr ""
 
-#: src/admin/index.js:1478
+#: src/admin/index.js:2315
 msgid "Check"
 msgstr ""
 
-#: src/admin/index.js:1479
+#: src/admin/index.js:2320
 msgid "Status"
 msgstr ""
 
-#: src/admin/index.js:1480
+#: src/admin/index.js:2325
 msgid "Details"
 msgstr ""
 
-#: src/admin/index.js:1531
+#: src/admin/index.js:2410
 msgid "Email settings saved."
 msgstr ""
 
-#: src/admin/index.js:1534
+#: src/admin/index.js:2422
 msgid "Failed to save."
 msgstr ""
 
-#: src/admin/index.js:1549
+#: src/admin/index.js:2446
 msgid "Send failed."
 msgstr ""
 
-#: src/admin/index.js:1557
-msgid "Loading email settings..."
+#: src/admin/index.js:2460
+msgid "Loading email settings…"
 msgstr ""
 
-#: src/admin/index.js:1563
+#: src/admin/index.js:2470
 msgid "Email Reports"
 msgstr ""
 
-#: src/admin/index.js:1568
+#: src/admin/index.js:2489
 msgid "Enable scheduled email reports"
 msgstr ""
 
-#: src/admin/index.js:1573
+#: src/admin/index.js:2501
 msgid "Recipients (comma-separated)"
 msgstr ""
 
-#: src/admin/index.js:1579
+#: src/admin/index.js:2514
 msgid "Frequency"
 msgstr ""
 
-#: src/admin/index.js:1582
+#: src/admin/index.js:2518
 msgid "Weekly"
 msgstr ""
 
-#: src/admin/index.js:1583
+#: src/admin/index.js:2522
 msgid "Monthly"
 msgstr ""
 
-#: src/admin/index.js:1588
+#: src/admin/index.js:2533
 msgid "Include \"Powered by Speculation Pilot Pro\" branding"
 msgstr ""
 
-#: src/admin/index.js:1595
+#: src/admin/index.js:2555
 msgid "Save email settings"
 msgstr ""
 
-#: src/admin/index.js:1596
+#: src/admin/index.js:2560
 msgid "Send test email"
 msgstr ""

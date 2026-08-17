@@ -12,9 +12,9 @@
     "qa:stop": "docker compose down --volumes --remove-orphans",
     "qa:restart": "npm run qa:stop && npm run qa:start",
     "test:e2e": "playwright test",
-    "lint:js": "wp-scripts lint-js src build",
-    "lint:css": "wp-scripts lint-style src build",
-    "format": "wp-scripts format-js src build",
+    "lint:js": "wp-scripts lint-js src",
+    "lint:css": "wp-scripts lint-style \"src/**/*.css\"",
+    "format": "wp-scripts format src",
     "check:all": "npm run lint:js && npm run lint:css",
     "plugin-zip": "node tools/package-plugin.js",
     "build:zip": "npm run build && node tools/package-plugin.js",
@@ -28,7 +28,11 @@
   "devDependencies": {
     "@playwright/test": "^1.56.0",
     "@wordpress/scripts": "^30.16.0",
-    "@wordpress/i18n": "^5.0.0"
+    "@wordpress/i18n": "^5.0.0",
+    "typescript": "^5.6.3"
+  },
+  "overrides": {
+    "typescript": "^5.6.3"
   },
   "engines": {
     "node": ">=18"

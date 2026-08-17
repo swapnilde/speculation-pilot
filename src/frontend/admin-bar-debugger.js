@@ -25,16 +25,30 @@
 		}
 
 		const navEntries = performance.getEntriesByType( 'navigation' );
-		const navEntry = navEntries.length > 0 ? navEntries[0] : null;
+		const navEntry = navEntries.length > 0 ? navEntries[ 0 ] : null;
 
 		let statusText = 'ℹ️ Status: Standard Navigation';
 
-		if ( document.prerendered || ( navEntry && navEntry.activationStart && navEntry.activationStart > 0 ) ) {
-			const ms = navEntry && navEntry.activationStart ? Math.round( navEntry.activationStart ) : 0;
+		if (
+			document.prerendered ||
+			( navEntry &&
+				navEntry.activationStart &&
+				navEntry.activationStart > 0 )
+		) {
+			const ms =
+				navEntry && navEntry.activationStart
+					? Math.round( navEntry.activationStart )
+					: 0;
 			statusText = `⚡ Status: Prerendered (Activated in ${ ms }ms)`;
-		} else if ( navEntry && navEntry.deliveryType === 'navigational-prefetch' ) {
+		} else if (
+			navEntry &&
+			navEntry.deliveryType === 'navigational-prefetch'
+		) {
 			statusText = '🚀 Status: Prefetched Navigation';
-		} else if ( document.referrer && window.location.origin === new URL( document.referrer ).origin ) {
+		} else if (
+			document.referrer &&
+			window.location.origin === new URL( document.referrer ).origin
+		) {
 			statusText = 'ℹ️ Status: Internal Navigation (Admin Session)';
 		}
 
@@ -53,7 +67,9 @@
 		}
 
 		const allLinks = Array.from( document.querySelectorAll( 'a[href]' ) );
-		const homeOrigin = config.homeUrl ? new URL( config.homeUrl ).origin : window.location.origin;
+		const homeOrigin = config.homeUrl
+			? new URL( config.homeUrl ).origin
+			: window.location.origin;
 
 		let internalCount = 0;
 		let eligibleCount = 0;
@@ -69,13 +85,19 @@
 				}
 
 				// Skip anchor links, javascript:, or mailto:
-				if ( url.pathname === window.location.pathname && url.hash && url.search === window.location.search ) {
+				if (
+					url.pathname === window.location.pathname &&
+					url.hash &&
+					url.search === window.location.search
+				) {
 					return;
 				}
 
 				internalCount++;
 
-				const isExcluded = config.exclusions.some( ( rule ) => isPathExcluded( url.pathname + url.search, rule ) );
+				const isExcluded = config.exclusions.some( ( rule ) =>
+					isPathExcluded( url.pathname + url.search, rule )
+				);
 
 				if ( isExcluded ) {
 					excludedCount++;
@@ -110,7 +132,12 @@
 		}
 
 		if ( rule.includes( '*' ) ) {
-			const regexStr = '^' + rule.replace( /[.+^${}()|[\]\\]/g, '\\$&' ).replace( /\*/g, '.*' ) + '$';
+			const regexStr =
+				'^' +
+				rule
+					.replace( /[.+^${}()|[\]\\]/g, '\\$&' )
+					.replace( /\*/g, '.*' ) +
+				'$';
 			const regex = new RegExp( regexStr, 'i' );
 			return regex.test( path );
 		}
