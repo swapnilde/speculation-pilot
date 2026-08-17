@@ -1,6 +1,5 @@
 {
   "name": "speculation-pilot/speculation-pilot",
-  "version": "0.3.0",
   "description": "Safely configure, diagnose, and measure WordPress speculative loading.",
   "type": "wordpress-plugin",
   "license": "GPL-2.0-or-later",

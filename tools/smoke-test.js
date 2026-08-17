@@ -40,14 +40,15 @@ const sourceBuildPairs = [
 	[ 'src/frontend/measurement.js', 'build/frontend/measurement.js' ],
 ];
 
+const assetDir = fs.existsSync( path.join( root, 'assets' ) ) ? 'assets' : '.wordpress-org';
 const imageFiles = [
-	'assets/icon-128x128.png',
-	'assets/icon-256x256.png',
-	'assets/banner-772x250.png',
-	'assets/banner-1544x500.png',
-	'assets/screenshot-1.png',
-	'assets/screenshot-2.png',
-	'assets/screenshot-3.png',
+	`${ assetDir }/icon-128x128.png`,
+	`${ assetDir }/icon-256x256.png`,
+	`${ assetDir }/banner-772x250.png`,
+	`${ assetDir }/banner-1544x500.png`,
+	`${ assetDir }/screenshot-1.png`,
+	`${ assetDir }/screenshot-2.png`,
+	`${ assetDir }/screenshot-3.png`,
 ];
 
 function read( file ) {
