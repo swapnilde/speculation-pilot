@@ -4,8 +4,8 @@
  * Plugin URI:  https://speculationpilot.com
  * Description: Safely configure, diagnose, and measure WordPress speculative loading.
  * Version:     0.3.0
- * Author:      Speculation Pilot
- * Author URI:  https://speculationpilot.com
+ * Author:      Swapnil Deshpande
+ * Author URI:  https://profiles.wordpress.org/swapnilde
  * Text Domain: speculation-pilot
  * License:     GPLv2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
