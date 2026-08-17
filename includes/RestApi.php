@@ -341,6 +341,7 @@ final class RestApi {
 			if ( ! empty( $pt->rewrite['slug'] ) && 'post' !== $pt->name && 'page' !== $pt->name ) {
 				$suggestions[] = array(
 					'path'  => '/' . trim( (string) $pt->rewrite['slug'], '/' ) . '/*',
+					/* translators: %s: Post type singular name (e.g. Product, Portfolio). */
 					'label' => sprintf( __( '%s Archive Paths', 'speculation-pilot' ), $pt->labels->singular_name ),
 				);
 			}

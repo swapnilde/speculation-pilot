@@ -117,6 +117,7 @@ final class AdminBarDebugger {
 		}
 
 		$route_label = $is_excluded
+			/* translators: %s: Matched exclusion path or wildcard rule. */
 			? sprintf( __( 'Route: 🚫 Excluded (%s)', 'speculation-pilot' ), $matched_rule )
 			: __( 'Route: ✅ Speculation Active', 'speculation-pilot' );
 
