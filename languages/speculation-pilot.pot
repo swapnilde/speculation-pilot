@@ -1,43 +1,42 @@
 # Copyright (C) 2026 Speculation Pilot
-# This file is distributed under the same license as the Speculation Pilot plugin.
+# This file is distributed under the GPLv2 or later.
 msgid ""
 msgstr ""
 "Project-Id-Version: Speculation Pilot 0.3.0\n"
-"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/speculation-pilot\n"
+"Report-Msgid-Bugs-To: https://github.com/your-org/speculation-pilot/issues\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-08-17T09:52:05+00:00\n"
+"POT-Creation-Date: 2026-08-17T12:15:40+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: speculation-pilot\n"
 
 #. Plugin Name of the plugin
 #. Author of the plugin
-#: speculation-pilot.php
+#: speculation-pilot.php:3
+#: speculation-pilot.php:7
 #: includes/Admin.php:46
 #: includes/Admin.php:47
-#: build/admin/index.js:365
 #: src/admin/index.js:365
 msgid "Speculation Pilot"
 msgstr ""
 
 #. Plugin URI of the plugin
 #. Author URI of the plugin
-#: speculation-pilot.php
+#: speculation-pilot.php:4
+#: speculation-pilot.php:8
 msgid "https://speculationpilot.com"
 msgstr ""
 
 #. Description of the plugin
-#: speculation-pilot.php
+#: speculation-pilot.php:5
 msgid "Safely configure, diagnose, and measure WordPress speculative loading."
 msgstr ""
 
 #: includes/Admin.php:143
-#: build/admin/index.js:32
-#: build/admin/index.js:1246
 #: src/admin/index.js:32
 #: src/admin/index.js:1246
 msgid "Settings"
@@ -108,7 +107,6 @@ msgid "PHP %1$s or newer is required. Current version: %2$s."
 msgstr ""
 
 #: includes/Diagnostics.php:84
-#: build/admin/index.js:514
 #: src/admin/index.js:514
 msgid "Plan"
 msgstr ""
@@ -202,25 +200,21 @@ msgid "Prerender can run page JavaScript before navigation is completed. Keep ca
 msgstr ""
 
 #: includes/Diagnostics.php:229
-#: build/admin/index.js:706
 #: src/admin/index.js:706
 msgid "Membership plugins"
 msgstr ""
 
 #: includes/Diagnostics.php:233
-#: build/admin/index.js:714
 #: src/admin/index.js:714
 msgid "LMS plugins"
 msgstr ""
 
 #: includes/Diagnostics.php:237
-#: build/admin/index.js:722
 #: src/admin/index.js:722
 msgid "Multilingual plugins"
 msgstr ""
 
 #: includes/Diagnostics.php:241
-#: build/admin/index.js:730
 #: src/admin/index.js:730
 msgid "Cache and optimization plugins"
 msgstr ""
@@ -336,229 +330,177 @@ msgstr ""
 msgid "Speculation Pilot is ready"
 msgstr ""
 
-#: build/admin/index.js:27
 #: src/admin/index.js:27
 msgid "Overview"
 msgstr ""
 
-#: build/admin/index.js:28
-#: build/admin/index.js:558
 #: src/admin/index.js:28
 #: src/admin/index.js:558
 msgid "Rules"
 msgstr ""
 
-#: build/admin/index.js:29
 #: src/admin/index.js:29
 msgid "Exclusions"
 msgstr ""
 
-#: build/admin/index.js:30
-#: build/admin/index.js:509
-#: build/admin/index.js:866
 #: src/admin/index.js:30
 #: src/admin/index.js:509
 #: src/admin/index.js:866
 msgid "Measurements"
 msgstr ""
 
-#: build/admin/index.js:31
-#: build/admin/index.js:504
-#: build/admin/index.js:1097
 #: src/admin/index.js:31
 #: src/admin/index.js:504
 #: src/admin/index.js:1097
 msgid "Diagnostics"
 msgstr ""
 
-#: build/admin/index.js:37
 #: src/admin/index.js:37
 msgid "Safe Boost"
 msgstr ""
 
-#: build/admin/index.js:38
 #: src/admin/index.js:38
 msgid "Conservative prefetch with the broadest safety exclusions. Best first setting for production sites."
 msgstr ""
 
-#: build/admin/index.js:43
 #: src/admin/index.js:43
 msgid "Balanced"
 msgstr ""
 
-#: build/admin/index.js:44
 #: src/admin/index.js:44
 msgid "Moderate prefetch with standard commerce and account safeguards. Good for content-heavy sites."
 msgstr ""
 
-#: build/admin/index.js:49
 #: src/admin/index.js:49
 msgid "Aggressive Lab"
 msgstr ""
 
-#: build/admin/index.js:50
 #: src/admin/index.js:50
 msgid "Prerender with warnings and guarded exclusions. Use for controlled testing before broad rollout."
 msgstr ""
 
-#: build/admin/index.js:98
 #: src/admin/index.js:98
 msgid "Requires Speculation Pilot Pro"
 msgstr ""
 
-#: build/admin/index.js:117
 #: src/admin/index.js:117
 msgid "Unlock with Speculation Pilot Pro"
 msgstr ""
 
-#: build/admin/index.js:125
 #: src/admin/index.js:125
 msgid "Upgrade →"
 msgstr ""
 
-#: build/admin/index.js:143
 #: src/admin/index.js:143
 msgid "Unlock WooCommerce presets, 365-day history, advanced reports, and more with Pro."
 msgstr ""
 
-#: build/admin/index.js:154
 #: src/admin/index.js:154
 msgid "See Pro →"
 msgstr ""
 
-#: build/admin/index.js:239
 #: src/admin/index.js:239
 msgid "Unable to load Speculation Pilot data."
 msgstr ""
 
-#: build/admin/index.js:307
 #: src/admin/index.js:307
 msgid "Settings saved."
 msgstr ""
 
-#: build/admin/index.js:313
 #: src/admin/index.js:313
 msgid "Unable to save settings."
 msgstr ""
 
-#: build/admin/index.js:322
 #: src/admin/index.js:322
 msgid "Clear all local Speculation Pilot measurement rows?"
 msgstr ""
 
-#: build/admin/index.js:338
 #: src/admin/index.js:338
 msgid "Local measurements cleared."
 msgstr ""
 
-#: build/admin/index.js:344
 #: src/admin/index.js:344
 msgid "Unable to clear measurements."
 msgstr ""
 
-#: build/admin/index.js:364
 #: src/admin/index.js:364
 msgid "WordPress speculative loading control"
 msgstr ""
 
-#: build/admin/index.js:369
 #: src/admin/index.js:369
 msgid "Safely tune prefetch and prerender behavior, protect risky WordPress routes, and measure local navigation timing without sending data to a SaaS."
 msgstr ""
 
-#: build/admin/index.js:382
 #: src/admin/index.js:382
 msgid "Refresh"
 msgstr ""
 
-#: build/admin/index.js:392
 #: src/admin/index.js:392
 msgid "Save settings"
 msgstr ""
 
-#: build/admin/index.js:415
 #: src/admin/index.js:415
 msgid "Loading plugin data..."
 msgstr ""
 
-#: build/admin/index.js:499
 #: src/admin/index.js:499
 msgid "Current mode"
 msgstr ""
 
-#: build/admin/index.js:500
-#: build/admin/index.js:604
 #: src/admin/index.js:500
 #: src/admin/index.js:604
 msgid "Disabled"
 msgstr ""
 
-#: build/admin/index.js:501
 #: src/admin/index.js:501
 msgid "Core rules are not being modified."
 msgstr ""
 
-#: build/admin/index.js:506
 #: src/admin/index.js:506
 msgid "Open Diagnostics for detailed compatibility notes."
 msgstr ""
 
-#: build/admin/index.js:511
 #: src/admin/index.js:511
 msgid "Local samples retained on this site."
 msgstr ""
 
-#: build/admin/index.js:511
 #: src/admin/index.js:511
 msgid "Measurement is currently off."
 msgstr ""
 
-#: build/admin/index.js:515
 #: src/admin/index.js:515
 msgid "Pro ✓"
 msgstr ""
 
-#: build/admin/index.js:515
 #: src/admin/index.js:515
 msgid "Free"
 msgstr ""
 
-#: build/admin/index.js:516
 #: src/admin/index.js:516
 msgid "All features unlocked."
 msgstr ""
 
-#: build/admin/index.js:516
 #: src/admin/index.js:516
 msgid "Upgrade for advanced reports."
 msgstr ""
 
-#: build/admin/index.js:525
 #: src/admin/index.js:525
 msgid "Active exclusions"
 msgstr ""
 
-#: build/admin/index.js:538
 #: src/admin/index.js:538
 msgid "No active exclusions yet."
 msgstr ""
 
-#: build/admin/index.js:543
 #: src/admin/index.js:543
 msgid "Timing snapshot"
 msgstr ""
 
-#: build/admin/index.js:544
-#: build/admin/index.js:928
 #: src/admin/index.js:544
 #: src/admin/index.js:928
 msgid "p50 duration"
 msgstr ""
 
-#: build/admin/index.js:545
-#: build/admin/index.js:929
-#: build/admin/index.js:990
-#: build/admin/index.js:1028
 #: src/admin/index.js:545
 #: src/admin/index.js:929
 #: src/admin/index.js:990
@@ -566,483 +508,382 @@ msgstr ""
 msgid "p75 duration"
 msgstr ""
 
-#: build/admin/index.js:546
-#: build/admin/index.js:930
 #: src/admin/index.js:546
 #: src/admin/index.js:930
 msgid "p75 TTFB"
 msgstr ""
 
-#: build/admin/index.js:586
 #: src/admin/index.js:586
 msgid "Prerender can execute JavaScript before the visitor commits to a navigation. Keep checkout, cart, account, and action URLs excluded."
 msgstr ""
 
-#: build/admin/index.js:593
 #: src/admin/index.js:593
 msgid "Enable Speculation Pilot"
 msgstr ""
 
-#: build/admin/index.js:600
 #: src/admin/index.js:600
 msgid "Mode"
 msgstr ""
 
-#: build/admin/index.js:603
-#: build/admin/index.js:616
 #: src/admin/index.js:603
 #: src/admin/index.js:616
 msgid "Core default"
 msgstr ""
 
-#: build/admin/index.js:605
 #: src/admin/index.js:605
 msgid "Prefetch"
 msgstr ""
 
-#: build/admin/index.js:606
 #: src/admin/index.js:606
 msgid "Prerender"
 msgstr ""
 
-#: build/admin/index.js:613
 #: src/admin/index.js:613
 msgid "Eagerness"
 msgstr ""
 
-#: build/admin/index.js:617
 #: src/admin/index.js:617
 msgid "Conservative"
 msgstr ""
 
-#: build/admin/index.js:618
 #: src/admin/index.js:618
 msgid "Moderate"
 msgstr ""
 
-#: build/admin/index.js:619
 #: src/admin/index.js:619
 msgid "Eager"
 msgstr ""
 
-#: build/admin/index.js:684
 #: src/admin/index.js:684
 msgid "Integration presets"
 msgstr ""
 
-#: build/admin/index.js:685
 #: src/admin/index.js:685
 msgid "Integration presets require Speculation Pilot Pro."
 msgstr ""
 
-#: build/admin/index.js:742
 #: src/admin/index.js:742
 msgid "Manual exclusions"
 msgstr ""
 
-#: build/admin/index.js:747
 #: src/admin/index.js:747
 msgid "Path pattern"
 msgstr ""
 
-#: build/admin/index.js:761
 #: src/admin/index.js:761
 msgid "Add path"
 msgstr ""
 
-#: build/admin/index.js:768
 #: src/admin/index.js:768
 msgid "Quick suggestions: "
 msgstr ""
 
-#: build/admin/index.js:802
 #: src/admin/index.js:802
 msgid "manual exclusions used."
 msgstr ""
 
-#: build/admin/index.js:803
 #: src/admin/index.js:803
 msgid "Unlimited with Pro."
 msgstr ""
 
-#: build/admin/index.js:824
 #: src/admin/index.js:824
 msgid "Remove"
 msgstr ""
 
-#: build/admin/index.js:829
 #: src/admin/index.js:829
 msgid "No manual exclusions have been added."
 msgstr ""
 
-#: build/admin/index.js:834
 #: src/admin/index.js:834
 msgid "Effective exclusion preview"
 msgstr ""
 
-#: build/admin/index.js:847
 #: src/admin/index.js:847
 msgid "Save settings to refresh the preview."
 msgstr ""
 
-#: build/admin/index.js:868
 #: src/admin/index.js:868
 msgid "Enable privacy-safe local measurement"
 msgstr ""
 
-#: build/admin/index.js:875
 #: src/admin/index.js:875
 msgid "Retention days"
 msgstr ""
 
-#: build/admin/index.js:875
 #: src/admin/index.js:875
 msgid "up to 365 with Pro"
 msgstr ""
 
-#: build/admin/index.js:896
 #: src/admin/index.js:896
 msgid "Export CSV"
 msgstr ""
 
-#: build/admin/index.js:908
 #: src/admin/index.js:908
 msgid "Download PDF"
 msgstr ""
 
-#: build/admin/index.js:919
 #: src/admin/index.js:919
 msgid "Clear measurements"
 msgstr ""
 
-#: build/admin/index.js:922
 #: src/admin/index.js:922
 msgid "Only local paths and timing numbers are stored."
 msgstr ""
 
-#: build/admin/index.js:927
-#: build/admin/index.js:989
-#: build/admin/index.js:1027
 #: src/admin/index.js:927
 #: src/admin/index.js:989
 #: src/admin/index.js:1027
 msgid "Samples"
 msgstr ""
 
-#: build/admin/index.js:931
 #: src/admin/index.js:931
 msgid "Prerender hits"
 msgstr ""
 
-#: build/admin/index.js:932
 #: src/admin/index.js:932
 msgid "Retention"
 msgstr ""
 
-#: build/admin/index.js:940
 #: src/admin/index.js:940
 msgid "Daily p75 duration"
 msgstr ""
 
-#: build/admin/index.js:950
 #: src/admin/index.js:950
 msgid "No daily trend yet."
 msgstr ""
 
-#: build/admin/index.js:956
 #: src/admin/index.js:956
 msgid "Mode breakdown"
 msgstr ""
 
-#: build/admin/index.js:965
 #: src/admin/index.js:965
 msgid "samples"
 msgstr ""
 
-#: build/admin/index.js:969
 #: src/admin/index.js:969
 msgid "No mode data yet."
 msgstr ""
 
-#: build/admin/index.js:976
 #: src/admin/index.js:976
 msgid "Path groups"
 msgstr ""
 
-#: build/admin/index.js:988
 #: src/admin/index.js:988
 msgid "Group"
 msgstr ""
 
-#: build/admin/index.js:991
-#: build/admin/index.js:1029
 #: src/admin/index.js:991
 #: src/admin/index.js:1029
 msgid "Prerenders"
 msgstr ""
 
-#: build/admin/index.js:1009
 #: src/admin/index.js:1009
 msgid "No grouped path data yet."
 msgstr ""
 
-#: build/admin/index.js:1015
 #: src/admin/index.js:1015
 msgid "Top paths"
 msgstr ""
 
-#: build/admin/index.js:1026
 #: src/admin/index.js:1026
 msgid "Path"
 msgstr ""
 
-#: build/admin/index.js:1047
 #: src/admin/index.js:1047
 msgid "No measurements yet."
 msgstr ""
 
-#: build/admin/index.js:1098
 #: src/admin/index.js:1098
 msgid "Overall status"
 msgstr ""
 
-#: build/admin/index.js:1120
 #: src/admin/index.js:1120
 msgid "Link opt-out selectors"
 msgstr ""
 
-#: build/admin/index.js:1133
 #: src/admin/index.js:1133
 msgid "No selector preview is available."
 msgstr ""
 
-#: build/admin/index.js:1181
 #: src/admin/index.js:1181
 msgid "Activation failed."
 msgstr ""
 
-#: build/admin/index.js:1190
 #: src/admin/index.js:1190
 msgid "Deactivate and remove the license key from this site?"
 msgstr ""
 
-#: build/admin/index.js:1208
 #: src/admin/index.js:1208
 msgid "Deactivation failed."
 msgstr ""
 
-#: build/admin/index.js:1230
 #: src/admin/index.js:1230
 msgid "Check failed."
 msgstr ""
 
-#: build/admin/index.js:1248
 #: src/admin/index.js:1248
 msgid "Delete plugin data on uninstall"
 msgstr ""
 
-#: build/admin/index.js:1255
 #: src/admin/index.js:1255
 msgid "I understand prerender safety tradeoffs"
 msgstr ""
 
-#: build/admin/index.js:1266
 #: src/admin/index.js:1266
 msgid "License"
 msgstr ""
 
-#: build/admin/index.js:1288
 #: src/admin/index.js:1288
 msgid "Pro license is active. All features are unlocked."
 msgstr ""
 
-#: build/admin/index.js:1293
 #: src/admin/index.js:1293
 msgid "License key:"
 msgstr ""
 
-#: build/admin/index.js:1295
-#: build/admin/index.js:1297
 #: src/admin/index.js:1295
 #: src/admin/index.js:1297
 msgid "Expires:"
 msgstr ""
 
-#: build/admin/index.js:1297
 #: src/admin/index.js:1297
 msgid "Lifetime"
 msgstr ""
 
-#: build/admin/index.js:1300
 #: src/admin/index.js:1300
 msgid "Customer:"
 msgstr ""
 
-#: build/admin/index.js:1313
-#: build/admin/index.js:1348
 #: src/admin/index.js:1313
 #: src/admin/index.js:1348
 msgid "Re-check"
 msgstr ""
 
-#: build/admin/index.js:1323
 #: src/admin/index.js:1323
 msgid "Deactivate"
 msgstr ""
 
-#: build/admin/index.js:1336
 #: src/admin/index.js:1336
 msgid "License key is present but not valid."
 msgstr ""
 
-#: build/admin/index.js:1336
 #: src/admin/index.js:1336
 msgid "Status:"
 msgstr ""
 
-#: build/admin/index.js:1358
 #: src/admin/index.js:1358
 msgid "Remove key"
 msgstr ""
 
-#: build/admin/index.js:1363
 #: src/admin/index.js:1363
 msgid "Enter your license key to unlock all Pro features."
 msgstr ""
 
-#: build/admin/index.js:1368
 #: src/admin/index.js:1368
 msgid "License key"
 msgstr ""
 
-#: build/admin/index.js:1383
 #: src/admin/index.js:1383
 msgid "Activate"
 msgstr ""
 
-#: build/admin/index.js:1391
 #: src/admin/index.js:1391
 msgid "You are using the free version of Speculation Pilot."
 msgstr ""
 
-#: build/admin/index.js:1392
 #: src/admin/index.js:1392
 msgid "Upgrade to Pro for WooCommerce presets, 365-day history, advanced reports, PDF exports, and more."
 msgstr ""
 
-#: build/admin/index.js:1400
 #: src/admin/index.js:1400
 msgid "Get Speculation Pilot Pro →"
 msgstr ""
 
-#: build/admin/index.js:1418
-#: build/admin/index.js:1422
 #: src/admin/index.js:1418
 #: src/admin/index.js:1422
 msgid "PDF generation failed."
 msgstr ""
 
-#: build/admin/index.js:1454
 #: src/admin/index.js:1454
 msgid "Site Audit"
 msgstr ""
 
-#: build/admin/index.js:1455
 #: src/admin/index.js:1455
 msgid "Run a comprehensive site audit to check your environment, configuration, exclusions, and content volume."
 msgstr ""
 
-#: build/admin/index.js:1464
 #: src/admin/index.js:1464
 msgid "Running audit..."
 msgstr ""
 
-#: build/admin/index.js:1464
 #: src/admin/index.js:1464
 msgid "Run site audit"
 msgstr ""
 
-#: build/admin/index.js:1471
 #: src/admin/index.js:1471
 msgid "Overall:"
 msgstr ""
 
-#: build/admin/index.js:1478
 #: src/admin/index.js:1478
 msgid "Check"
 msgstr ""
 
-#: build/admin/index.js:1479
 #: src/admin/index.js:1479
 msgid "Status"
 msgstr ""
 
-#: build/admin/index.js:1480
 #: src/admin/index.js:1480
 msgid "Details"
 msgstr ""
 
-#: build/admin/index.js:1531
 #: src/admin/index.js:1531
 msgid "Email settings saved."
 msgstr ""
 
-#: build/admin/index.js:1534
 #: src/admin/index.js:1534
 msgid "Failed to save."
 msgstr ""
 
-#: build/admin/index.js:1549
 #: src/admin/index.js:1549
 msgid "Send failed."
 msgstr ""
 
-#: build/admin/index.js:1557
 #: src/admin/index.js:1557
 msgid "Loading email settings..."
 msgstr ""
 
-#: build/admin/index.js:1563
 #: src/admin/index.js:1563
 msgid "Email Reports"
 msgstr ""
 
-#: build/admin/index.js:1568
 #: src/admin/index.js:1568
 msgid "Enable scheduled email reports"
 msgstr ""
 
-#: build/admin/index.js:1573
 #: src/admin/index.js:1573
 msgid "Recipients (comma-separated)"
 msgstr ""
 
-#: build/admin/index.js:1579
 #: src/admin/index.js:1579
 msgid "Frequency"
 msgstr ""
 
-#: build/admin/index.js:1582
 #: src/admin/index.js:1582
 msgid "Weekly"
 msgstr ""
 
-#: build/admin/index.js:1583
 #: src/admin/index.js:1583
 msgid "Monthly"
 msgstr ""
 
-#: build/admin/index.js:1588
 #: src/admin/index.js:1588
 msgid "Include \"Powered by Speculation Pilot Pro\" branding"
 msgstr ""
 
-#: build/admin/index.js:1595
 #: src/admin/index.js:1595
 msgid "Save email settings"
 msgstr ""
 
-#: build/admin/index.js:1596
 #: src/admin/index.js:1596
 msgid "Send test email"
 msgstr ""

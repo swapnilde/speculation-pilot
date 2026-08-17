@@ -17,13 +17,23 @@
     "format": "wp-scripts format-js src build",
     "check:all": "npm run lint:js && npm run lint:css",
     "plugin-zip": "node tools/package-plugin.js",
-    "build:zip": "npm run build && node tools/package-plugin.js"
+    "build:zip": "npm run build && node tools/package-plugin.js",
+    "check:textdomain": "php vendor/bin/phpcs --standard=WordPress --sniffs=WordPress.WP.I18n --runtime-set text_domain speculation-pilot ./speculation-pilot.php ./includes/ ./uninstall.php ./src/ && echo '✅ PHP text domains OK'",
+    "check:readme": "node tools/check-readme.js",
+    "readme:md": "node tools/readme-txt-to-md.js",
+    "i18n:pot": "wp i18n make-pot . languages/speculation-pilot.pot --slug=speculation-pilot --domain=speculation-pilot --exclude=node_modules,vendor,build,dist,tests,test-results,tools,docs,languages --headers='{\"Report-Msgid-Bugs-To\":\"https://github.com/your-org/speculation-pilot/issues\",\"Language-Team\":\"LANGUAGE <EMAIL@ADDRESS>\"}'",
+		"i18n:js": "wp i18n make-json languages/",
+		"i18n": "npm run i18n:pot && npm run i18n:js"
   },
   "devDependencies": {
     "@playwright/test": "^1.56.0",
-    "@wordpress/scripts": "^30.16.0"
+    "@wordpress/scripts": "^30.16.0",
+    "@wordpress/i18n": "^5.0.0"
   },
   "engines": {
     "node": ">=18"
-  }
+  },
+  "browserslist": [
+		"extends @wordpress/browserslist-config"
+	]
 }
