@@ -24,6 +24,7 @@ const ignore = new Set(
 ignore.add( 'dist' );
 ignore.add( '.git' );
 ignore.add( '.tmp-verify' );
+ignore.add( '.wordpress-org' );
 
 function shouldIgnore( relative ) {
 	const parts = relative.split( path.sep );
